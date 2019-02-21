@@ -1,0 +1,71 @@
+type Links {
+    label: String
+    uri: String
+}
+
+
+
+type BDates {
+    creation: String
+    modification: String
+    _public: String
+    benchmark_start: String
+    benchmark_stop: String
+}
+
+type Challenge{
+    _id: String
+    _schema: String
+    orig_id: String
+    name: String
+    is_automated: Boolean
+    dates: CDates
+    url: String
+    benchmarking_event_id: String
+    challenge_contact_ids: [String]
+    references: [String]
+}
+
+type CDates {
+    creation: String
+    modification: String
+    _public: String
+    challenge_start: String
+    challenge_stop: String
+}
+
+type BenchmarkingEvent {
+    _id: String
+    _schema: String
+    orig_id: String
+    name: String
+    is_automated: Boolean
+    dates: BDates
+    url: String
+    community_id: String
+    bench_contact_ids: [String]
+    references: [String]
+    challenges: [Challenge]
+}
+
+
+type Community {
+    _id: String
+    _schema: String
+    description: String
+    acronym: String
+    status: String
+    name: String
+    community_contact_ids: [String]
+    links: [Links]
+    bEvents: [BenchmarkingEvent]
+}
+
+
+type Query{
+    getAllCommunities : [Community]
+    getCommunityById(_id: String): Community
+    getAllBEvents : [BenchmarkingEvent]
+    getBEventsByCommunityId(community_id: String): [BenchmarkingEvent]
+    getChallengesByBEventId(benchmarking_event_id: String): [Challenge]
+}
