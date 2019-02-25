@@ -23,73 +23,104 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MongoService {
-    
+
     @Autowired
     private CommunityRepository cr;
-    
+
     @Autowired
     private BenchmarkingEventRepository br;
-    
+
     @Autowired
     private ChallengeRepository chr;
-    
-    
+
     /**
      * Get all the communities
+     *
      * @return list of communities
      */
-    public List<Community> getAllCommunities(){
-        return cr.findAll();
+    public List<Community> getAllCommunities() {
+        List<Community> comm = new ArrayList<>();
+        try {
+            comm = cr.findAll();
+            for (Community c : comm) {
+                List<BenchmarkingEvent> be = new ArrayList<>();
+                be = this.getBEventsByCommunityId(c.getId());
+                c.setbEvents(be);
+            }
+            return comm;
+        } catch (NullPointerException e) {
+            System.out.println(e);
+        }
+
+        return comm;
     }
-    
+
     /**
-     * Get the community by id and all its benchmarking events and all challenges
-     * for the benchmarking events
+     * Get the community by id and all its benchmarking events and all
+     * challenges for the benchmarking events
+     *
      * @param id
      * @return list of communities with hierarchy
      */
-    public Community getCommunityById(String id){
+    public Community getCommunityById(String id) {
         Community comm = new Community();
-        try{
+        try {
             comm = cr.getCommunityById(id);
             List<BenchmarkingEvent> be = this.getBEventsByCommunityId(id);
             comm.setbEvents(be);
             return comm;
-        } catch(NullPointerException e){
+        } catch (NullPointerException e) {
             System.out.println(e);
         }
         return comm;
-    }    
-    
+    }
+
     /**
-     * Get all benchmarking events 
+     * Get all benchmarking events
+     *
      * @return list of benchmarking events
      */
-    public List<BenchmarkingEvent> getAllBEvents(){
-        return br.findAll();
-    }
-    
-    /**
-     * Get benchmarking event by id and and all the challenges for that event
-     * @param id
-     * @return list of benchmarking event with hierarchy
-     */
-    public List<BenchmarkingEvent> getBEventsByCommunityId(String id){
-        List<Challenge> challenges = new ArrayList<Challenge>();
-        List<BenchmarkingEvent> be = br.getBEventsByCommunityId(id);
-        for (BenchmarkingEvent b : be){
-            for (Challenge c : this.getChallengesByBEventId(b.getId())){
-                challenges.add(c);
-            }
+    public List<BenchmarkingEvent> getAllBEvents() {
+
+        List<BenchmarkingEvent> be = new ArrayList<>();
+        be = br.findAll();
+        for (BenchmarkingEvent b : be) {
+            List<Challenge> challenges = new ArrayList<>();
+            challenges = this.getChallengesByBEventId(b.getId());
             b.setChallenges(challenges);
         }
         return be;
     }
 
     /**
-     * Get Challenge by id
+     * Get benchmarking event by id and and all the challenges for that event
+     *
      * @param id
-     * @return Challenge 
+     * @return list of benchmarking event with hierarchy
+     */
+    public List<BenchmarkingEvent> getBEventsByCommunityId(String id) {
+
+        List<BenchmarkingEvent> be = new ArrayList<>();
+        try {
+            be = br.getBEventsByCommunityId(id);
+            for (BenchmarkingEvent b : be) {
+                List<Challenge> challenges = new ArrayList<>();
+                challenges = this.getChallengesByBEventId(b.getId());
+                b.setChallenges(challenges);
+            }
+
+            return be;
+        } catch (NullPointerException e) {
+            System.out.println(e);
+        }
+        return be;
+    }
+
+    /**
+     * Get Challenge by id
+     *
+     * @param id
+     * @return Challenge
      */
     public List<Challenge> getChallengesByBEventId(String id) {
         return chr.getChallengesByBEventId(id);
