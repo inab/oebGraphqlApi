@@ -7,19 +7,23 @@ package com.comp.model.tool;
 
 import com.comp.model.utils.ToolAccess;
 import java.util.List;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
  *
  * @author vsundesh
  */
+@Document (collection="Tool")
 public class Tool {
-    private String tool;
+    private String _id;
     private String _schema;
     private String registry_tool_id;
     private String name;
     private String description;
     private Boolean is_automated;
-    private List<String> tool_contat_ids;
+    @Field("tool_contact_id")
+    private List<String> tool_contact_ids;
     private String status;
     private String activation;
     private String deactivation;

@@ -1,4 +1,4 @@
-type Links {
+type Link {
     label: String
     uri: String
 }
@@ -57,10 +57,73 @@ type Community {
     status: String
     name: String
     community_contact_ids: [String]
-    links: [Links]
+    links: [Link]
     bEvents: [BenchmarkingEvent]
 }
 
+
+type ToolAccess{
+    tool_access_type: String
+    link: String
+    techdocs: [Link]
+}
+
+type Tool {
+    _id: String
+    _schema: String
+    registry_tool_id: String
+    name: String
+    description: String
+    is_automated: Boolean
+    tool_contact_ids: [String]
+    status: String
+    activation: String
+    deactivation: String
+    references: [String]
+    tool_access: [ToolAccess]
+}
+
+type Dates{
+    creation: String
+    modification: String
+    _public: String
+}
+
+type Datalink{
+    attrs: [String]
+    validation_date: String
+    status: String
+    uri: [String]
+}
+
+type RelDatasetId {
+    dataset_id: String
+    role: String
+}
+
+type DependsOn {
+    metrics_id: String
+    tool_id: String
+    rel_dataset_ids: [RelDatasetId]
+}
+
+type Dataset{
+    _id: String
+    _schema: String
+    orig_id: String
+    community_id: String
+    challenge_ids: [String]
+    visibility: String
+    name: String
+    version: String
+    description: String
+    dates: Dates
+    type: String
+    datalink: Datalink
+    dataset_contact_ids: [String]
+    depends_on: DependsOn
+    references: [String]
+}
 
 type Query{
     getAllCommunities : [Community]
@@ -68,4 +131,7 @@ type Query{
     getAllBEvents : [BenchmarkingEvent]
     getBEventsByCommunityId(community_id: String): [BenchmarkingEvent]
     getChallengesByBEventId(benchmarking_event_id: String): [Challenge]
+    getAllTools : [Tool]
+    getAllDatasets: [Dataset]
+
 }

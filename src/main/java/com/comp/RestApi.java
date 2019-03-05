@@ -29,8 +29,8 @@ public class RestApi {
     private MongoService ms;
     
     @RequestMapping()
-    public List<Community> getCommunities(){
-        return ms.getAllCommunities();
+    public String getCommunities(){
+        return "Only Graphql Api implemented. use the endpoint /graphiql";
     };
 
     

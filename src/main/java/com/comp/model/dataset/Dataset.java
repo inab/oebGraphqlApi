@@ -10,6 +10,7 @@ import com.comp.model.utils.Datalink;
 import com.comp.model.utils.DependsOn;
 import java.util.List;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 
 /**
@@ -22,7 +23,8 @@ public class Dataset {
     private String _schema;
     private String orig_id;
     private String community_id;
-    private List<String> challenge_id;
+    @Field("challenge_id")
+    private List<String> challenge_ids;
     private String visibility;
     private String name;
     private String version;
@@ -32,5 +34,5 @@ public class Dataset {
     private Datalink datalink;
     private List<String> dataset_contact_ids;
     private DependsOn depends_on;
-    private String references;
+    private List<String> references;
 }

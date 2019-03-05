@@ -3,18 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.comp.model.idsolve;
+package com.comp.model.dataset;
 
-import java.util.List;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
  *
  * @author vsundesh
  */
-public class Idsolve {
-    private String _id;
-    private String _schema;
-    private String description;
-    private String pattern;
-    private String endpoints;
+public interface DatasetRepository extends DatasetRepositoryCustom, MongoRepository<Dataset, String> {
+    
 }

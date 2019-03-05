@@ -8,14 +8,14 @@ package com.comp.graphqlResolver;
 import com.comp.model.benchmarkingEvent.BenchmarkingEvent;
 import com.comp.model.challenge.Challenge;
 import com.comp.model.community.Community;
+import com.comp.model.dataset.Dataset;
+import com.comp.model.tool.Tool;
 //import com.comp.model.community.CommunityRepository;
 import com.comp.service.MongoService;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
@@ -45,5 +45,13 @@ public class Query implements GraphQLQueryResolver{
     
     public List<Challenge> getChallengesByBEventId(String id){
         return ms.getChallengesByBEventId(id);
+    }
+    
+    public List<Tool> getAllTools(){
+        return ms.getAllTools();
+    }
+    
+    public List<Dataset> getAllDatasets(){
+        return ms.getAllDatasets();
     }
 }

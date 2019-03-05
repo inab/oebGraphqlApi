@@ -17,5 +17,5 @@ public class Datalink {
     private String status;
     // TODO 
     //The uri will change !!
-    private String uri;
+    private List<String> uri;
 }

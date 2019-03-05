@@ -3,18 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.comp.model.idsolve;
+package com.comp.model.tool;
 
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author vsundesh
  */
-public class Idsolve {
-    private String _id;
-    private String _schema;
-    private String description;
-    private String pattern;
-    private String endpoints;
+@Repository
+public interface ToolRepositoryCustom {
+    
 }

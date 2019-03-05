@@ -12,6 +12,10 @@ import com.comp.model.challenge.ChallengeRepository;
 
 import com.comp.model.community.Community;
 import com.comp.model.community.CommunityRepository;
+import com.comp.model.dataset.Dataset;
+import com.comp.model.dataset.DatasetRepository;
+import com.comp.model.tool.Tool;
+import com.comp.model.tool.ToolRepository;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +37,17 @@ public class MongoService {
     @Autowired
     private ChallengeRepository chr;
 
+    @Autowired
+    private ToolRepository tr;
+    
+    @Autowired
+    private DatasetRepository dr;
     /**
      * Get all the communities
      *
      * @return list of communities
      */
-    public List<Community> getAllCommunities() {
+        public List<Community> getAllCommunities() {
         List<Community> comm = new ArrayList<>();
         try {
             comm = cr.findAll();
@@ -126,4 +135,11 @@ public class MongoService {
         return chr.getChallengesByBEventId(id);
     }
 
+    public List<Tool> getAllTools(){
+        return tr.findAll();
+    }
+    
+    public List<Dataset> getAllDatasets(){
+        return dr.findAll();
+    }
 }
