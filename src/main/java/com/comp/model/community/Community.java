@@ -6,10 +6,13 @@
 package com.comp.model.community;
 
 import com.comp.model.benchmarkingEvent.BenchmarkingEvent;
+import com.comp.model.benchmarkingEvent.BenchmarkingEventFilters;
 import com.comp.model.utils.Link;
 import com.comp.model.utils.MetricsCategory;
 import com.comp.model.utils.ReferenceTool;
+import com.comp.service.MongoService;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -31,7 +34,11 @@ public class Community {
     private List<String> community_contact_ids;
     private List<MetricsCategory> metrics_categories;
     private List <ReferenceTool> reference_tools;
-    private List<BenchmarkingEvent> bEvents;
+    private List <BenchmarkingEvent> bEvents;
+
+    
+    public Community() {
+    }
 
     public Community(String _id, String _schema, String name, String acronym, String status, String description, List<String> keywords, List<Link> links, List<String> community_contact_ids, List<MetricsCategory> metrics_categories, List<ReferenceTool> reference_tools, List<BenchmarkingEvent> bEvents) {
         this._id = _id;
@@ -47,10 +54,6 @@ public class Community {
         this.reference_tools = reference_tools;
         this.bEvents = bEvents;
     }
-
-    public Community() {
-    }
-
     
     
 
@@ -149,8 +152,6 @@ public class Community {
     public void setbEvents(List<BenchmarkingEvent> bEvents) {
         this.bEvents = bEvents;
     }
-
-    
     
     
 }

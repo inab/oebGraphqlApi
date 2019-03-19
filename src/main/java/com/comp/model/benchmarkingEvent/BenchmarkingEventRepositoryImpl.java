@@ -5,6 +5,7 @@
  */
 package com.comp.model.benchmarkingEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -22,13 +23,24 @@ public class BenchmarkingEventRepositoryImpl implements BenchmarkingEventReposit
     @Autowired
     private MongoTemplate mt;
 
+
     @Override
-    public List<BenchmarkingEvent> getBEventsByCommunityId(String id) {
-        Query query = new Query(Criteria.where("community_id").is(id));
-        return mt.find(query, BenchmarkingEvent.class);
+    public List<BenchmarkingEvent> getBenchmarkingEvents(BenchmarkingEventFilters benchmarkingEventFilters){
+        List <BenchmarkingEvent> bevents = new ArrayList<>();
+        Query query = new Query();
+        if(benchmarkingEventFilters!=null){
+            if(benchmarkingEventFilters.getId()!=null){
+                query.addCriteria(Criteria.where("_id").is(benchmarkingEventFilters.getId()));
+            }
+            if(benchmarkingEventFilters.getCommunity_id()!=null){
+                query.addCriteria(Criteria.where("community_id").is(benchmarkingEventFilters.getCommunity_id()));
+            }
+//            System.out.println(query.toString());
+            bevents = mt.find(query,BenchmarkingEvent.class);
+            
+        }else{
+            bevents = mt.findAll(BenchmarkingEvent.class);
+        }
+        return bevents;
     }
-
-
-
-
 }

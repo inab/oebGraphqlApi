@@ -49,17 +49,7 @@ type BenchmarkingEvent {
 }
 
 
-type Community {
-    _id: String
-    _schema: String
-    description: String
-    acronym: String
-    status: String
-    name: String
-    community_contact_ids: [String]
-    links: [Link]
-    bEvents: [BenchmarkingEvent]
-}
+
 
 
 type ToolAccess{
@@ -125,13 +115,41 @@ type Dataset{
     references: [String]
 }
 
+input DatasetFilters {
+    visibility: String
+    community_id : String
+}
+
+input CommunityFilters {
+    id: String
+    keywords: [String]
+    status: String
+    
+}
+input BenchmarkingEventFilters {
+    id: String
+    community_id : String
+}
+
+type Community {
+    _id: String
+    _schema: String
+    description: String
+    acronym: String
+    status: String
+    keywords: [String]
+    name: String
+    community_contact_ids: [String]
+    links: [Link]
+    bEvents: [BenchmarkingEvent]
+}
+
 type Query{
-    getAllCommunities : [Community]
-    getCommunityById(_id: String): Community
-    getAllBEvents : [BenchmarkingEvent]
-    getBEventsByCommunityId(community_id: String): [BenchmarkingEvent]
+
     getChallengesByBEventId(benchmarking_event_id: String): [Challenge]
     getAllTools : [Tool]
-    getAllDatasets: [Dataset]
+    getCommunities(communityFilters: CommunityFilters, benchmarkingEventFilters: BenchmarkingEventFilters) : [Community]
+    getDatasets(datasetFilters: DatasetFilters): [Dataset]
+    getBenchmarkingEvents(benchmarkingEventFilters: BenchmarkingEventFilters) : [BenchmarkingEvent]
 
 }

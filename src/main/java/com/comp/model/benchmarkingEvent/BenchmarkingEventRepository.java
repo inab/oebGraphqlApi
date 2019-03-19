@@ -6,7 +6,6 @@
 package com.comp.model.benchmarkingEvent;
 
 
-import com.comp.model.benchmarkingEvent.BenchmarkingEvent;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

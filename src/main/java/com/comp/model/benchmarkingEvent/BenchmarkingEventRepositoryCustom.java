@@ -14,6 +14,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface BenchmarkingEventRepositoryCustom {
-    public List<BenchmarkingEvent> getBEventsByCommunityId(String id);
-    
+    List<BenchmarkingEvent> getBenchmarkingEvents(BenchmarkingEventFilters benchmarkingEventFilters);
 }

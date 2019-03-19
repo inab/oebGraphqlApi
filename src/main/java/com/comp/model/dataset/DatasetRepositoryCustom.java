@@ -5,10 +5,12 @@
  */
 package com.comp.model.dataset;
 
+import java.util.List;
+
 /**
  *
  * @author vsundesh
  */
 public interface DatasetRepositoryCustom {
-    
+    List<Dataset> getDatasets(DatasetFilters datasetFilters);
 }

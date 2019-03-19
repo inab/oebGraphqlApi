@@ -5,7 +5,7 @@
  */
 package com.comp.model.community;
 
-import com.comp.model.community.Community;
+import com.comp.model.benchmarkingEvent.BenchmarkingEventFilters;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CommunityRepositoryCustom {
-    public Community getCommunityById(String id);
+    public List<Community> getCommunities(CommunityFilters communityFilters);
     
 }

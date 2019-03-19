@@ -5,8 +5,7 @@
  */
 package com.comp.model.community;
 
-import com.comp.model.community.CommunityRepositoryCustom;
-import com.comp.model.community.Community;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -22,14 +21,30 @@ import org.springframework.data.mongodb.core.query.Query;
 public class CommunityRepositoryImpl implements CommunityRepositoryCustom {
 
     @Autowired
-    private MongoTemplate mt;
-    
-    
+    private MongoTemplate mt; 
+
     @Override
-    public Community getCommunityById(String id) {
-         Query query = new Query(Criteria.where("_id").is(id));
-         return mt.findOne(query, Community.class);
-    }  
+    public List<Community> getCommunities(CommunityFilters communityFilters) {
+         List <Community> comms = new ArrayList<>();
+         Query query = new Query();
+        if(communityFilters!=null){
+            if(communityFilters.getId() !=null){
+                query.addCriteria(Criteria.where("_id").is(communityFilters.getId()));
+            }
+            if(communityFilters.getStatus() !=null){
+                query.addCriteria(Criteria.where("status").is(communityFilters.getStatus()));
+            }
+            comms = mt.find(query,Community.class);
+            
+        }else{
+            comms = mt.findAll(Community.class);
+        }
+        return comms;
+    }
+
+   
+    
+    
 
 
 }
