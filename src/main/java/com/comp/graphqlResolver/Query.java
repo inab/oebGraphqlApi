@@ -16,7 +16,6 @@ import com.comp.model.dataset.DatasetFilters;
 import com.comp.model.tool.Tool;
 import com.comp.model.tool.ToolFilters;
 import com.comp.service.MongoService;
-import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,14 +25,14 @@ import org.springframework.stereotype.Component;
  * @author vsundesh
  */
 @Component
-public class Query implements GraphQLQueryResolver{
+public class Query{
     
     @Autowired    
     private MongoService ms;    
    
-    public List<Community> getCommunities(CommunityFilters communityFilters){
-        return ms.getCommunities(communityFilters);
-    }
+//    public List<Community> getCommunities(CommunityFilters communityFilters){
+//        return ms.getCommunities(communityFilters);
+//    }
     
     public List<BenchmarkingEvent> getBenchmarkingEvents(BenchmarkingEventFilters benchmarkingEventFilters){
         return ms.getBenchmarkingEvents(benchmarkingEventFilters);

@@ -45,14 +45,7 @@ public class Community {
     private List<String> community_contact_ids;
     private List<MetricsCategory> metrics_categories;
     private List <ReferenceTool> reference_tools;
-    private List <BenchmarkingEvent> benchmarkingEvents;
-    //private MongoService ms;
-
-    
-          
-//    public List<BenchmarkingEvent> benchmarkingEvents(BenchmarkingEventFilters benchmarkingEventFilters){
-//        return ms.getBenchmarkingEvents(benchmarkingEventFilters);
-//    };
+//    private List <BenchmarkingEvent> benchmarkingEvents;
 
     
     
@@ -61,22 +54,15 @@ public class Community {
     }
     
     
-    public List<BenchmarkingEvent> getBenchmarkingEvents() {
-            return benchmarkingEvents;
-    }
-
-
-    public void setBenchmarkingEvents(List<BenchmarkingEvent> benchmarkingEvents) {
-            this.benchmarkingEvents = benchmarkingEvents;
-    }
-
-//    public MongoService getMs() {
-//        return ms;
+//    public List<BenchmarkingEvent> getBenchmarkingEvents() {
+//            return benchmarkingEvents;
 //    }
 //
-//    public void setMs(MongoService ms) {
-//        this.ms = ms;
+//
+//    public void setBenchmarkingEvents(List<BenchmarkingEvent> benchmarkingEvents) {
+//            this.benchmarkingEvents = benchmarkingEvents;
 //    }
+
     
     public String getId() {
         return _id;

@@ -1,7 +1,4 @@
-type Link {
-    label: String
-    uri: String
-}
+"""
 
 
 
@@ -126,12 +123,7 @@ input DatasetFilters {
     community_id : String
 }
 
-input CommunityFilters {
-    id: String
-    keywords: [String]
-    status: String
-    
-}
+
 input BenchmarkingEventFilters {
     id: String
     community_id : String
@@ -140,6 +132,18 @@ input BenchmarkingEventFilters {
 input ChallengeFilters {
     id: String
     benchmarking_event_id: String
+}
+"""
+input CommunityFilters {
+    id: String
+    keywords: [String]
+    status: String
+    
+}
+
+type Link {
+    label: String
+    uri: String
 }
 
 type Community {
@@ -152,22 +156,18 @@ type Community {
     name: String
     community_contact_ids: [String]
     links: [Link]
-    benchmarkingEvents: [BenchmarkingEvent]
 }
 
 type Query{
 
     
-    getTools(toolFilters: ToolFilters) : [Tool]
+    #getTools(toolFilters: ToolFilters) : [Tool]
 
     getCommunities(communityFilters: CommunityFilters) : [Community]
 
-    getBenchmarkingEvents(benchmarkingEventFilters: BenchmarkingEventFilters) : [BenchmarkingEvent]
+    #getBenchmarkingEvents(benchmarkingEventFilters: BenchmarkingEventFilters) : [BenchmarkingEvent]
 
-    getChallenges(challengeFilters: ChallengeFilters): [Challenge]
+    #getChallenges(challengeFilters: ChallengeFilters): [Challenge]
 
-    getDatasets(datasetFilters: DatasetFilters): [Dataset]
-
-    
-
+    #getDatasets(datasetFilters: DatasetFilters): [Dataset]
 }

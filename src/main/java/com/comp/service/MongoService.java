@@ -60,22 +60,22 @@ public class MongoService {
     
     
     
-    public List<Community> getCommunities(CommunityFilters communityFilters) {
-        DataFetcher bevent = (DataFetcher<List<BenchmarkingEvent>>) (DataFetchingEnvironment environment) -> {
-            System.out.println(environment);
-            return null;
-        };
-        
-        List<Community> c = new ArrayList<>();
-        c = cr.getCommunities(communityFilters);   
-        for (Community com : c){
-            BenchmarkingEventFilters benchmarkingEventFilters = new BenchmarkingEventFilters();
-            benchmarkingEventFilters.setCommunity_id(com.getId());
-            List<BenchmarkingEvent> b = this.getBenchmarkingEvents(benchmarkingEventFilters);
-            com.setBenchmarkingEvents(b);
-        }
-        return c;
-    }
+//    public List<Community> getCommunities(CommunityFilters communityFilters) {
+//        DataFetcher bevent = (DataFetcher<List<BenchmarkingEvent>>) (DataFetchingEnvironment environment) -> {
+//            System.out.println(environment);
+//            return null;
+//        };
+//        
+//        List<Community> c = new ArrayList<>();
+//        c = cr.getCommunities(communityFilters);   
+//        for (Community com : c){
+//            BenchmarkingEventFilters benchmarkingEventFilters = new BenchmarkingEventFilters();
+//            benchmarkingEventFilters.setCommunity_id(com.getId());
+//            List<BenchmarkingEvent> b = this.getBenchmarkingEvents(benchmarkingEventFilters);
+//            com.setBenchmarkingEvents(b);
+//        }
+//        return c;
+//    }
         
         
     public List<BenchmarkingEvent> getBenchmarkingEvents(BenchmarkingEventFilters benchmarkingEventFilters){
@@ -110,4 +110,9 @@ public class MongoService {
     public List<Dataset> getDatasets(DatasetFilters datasetFilters){
         return dr.getDatasets(datasetFilters);
     }
+
+    public List<Community> getComs(DataFetchingEnvironment environment) {
+        System.out.println(environment);
+        return  cr.findAll();
+    };
 }
