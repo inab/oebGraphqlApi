@@ -29,4 +29,7 @@ public class Tool {
     private String deactivation;
     private List<String> references;
     private List<ToolAccess> tool_access;
+    //Not in schema
+    private List<String> community_id;
+    
 }

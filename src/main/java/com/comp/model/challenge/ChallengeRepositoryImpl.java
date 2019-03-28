@@ -6,6 +6,7 @@
 package com.comp.model.challenge;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -22,9 +23,23 @@ public class ChallengeRepositoryImpl implements ChallengeRepositoryCustom {
     private MongoTemplate mt;
 
     @Override
-    public List<Challenge> getChallengesByBEventId(String id) {
-        Query query = new Query(Criteria.where("benchmarking_event_id").is(id));
-        return mt.find(query, Challenge.class);
+    public List<Challenge> getChallenges(ChallengeFilters challengeFilters) {
+        
+         List <Challenge> challenges = new ArrayList<>();
+        Query query = new Query();
+        if(challengeFilters!=null){
+            if(challengeFilters.getId()!=null){
+                query.addCriteria(Criteria.where("_id").is(challengeFilters.getId()));
+            }
+            if(challengeFilters.getBenchmarking_event_id()!=null){
+                query.addCriteria(Criteria.where("benchmarking_event_id").is(challengeFilters.getBenchmarking_event_id()));
+            }
+//            System.out.println(query.toString());
+            challenges = mt.find(query,Challenge.class);
+            System.out.println(query);
+        }else{
+            challenges = mt.findAll(Challenge.class);
+        }
+        return challenges;
     }
-    
 }

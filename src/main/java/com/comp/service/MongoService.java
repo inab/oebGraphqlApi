@@ -9,6 +9,7 @@ import com.comp.model.benchmarkingEvent.BenchmarkingEvent;
 import com.comp.model.benchmarkingEvent.BenchmarkingEventFilters;
 import com.comp.model.benchmarkingEvent.BenchmarkingEventRepository;
 import com.comp.model.challenge.Challenge;
+import com.comp.model.challenge.ChallengeFilters;
 import com.comp.model.challenge.ChallengeRepository;
 
 import com.comp.model.community.Community;
@@ -18,7 +19,10 @@ import com.comp.model.dataset.Dataset;
 import com.comp.model.dataset.DatasetFilters;
 import com.comp.model.dataset.DatasetRepository;
 import com.comp.model.tool.Tool;
+import com.comp.model.tool.ToolFilters;
 import com.comp.model.tool.ToolRepository;
+import graphql.schema.DataFetcher;
+import graphql.schema.DataFetchingEnvironment;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +32,11 @@ import org.springframework.stereotype.Service;
  *
  * @author vsundesh
  */
+
 @Service
 public class MongoService {
+    
+    
 
     @Autowired
     private CommunityRepository cr;
@@ -46,31 +53,58 @@ public class MongoService {
     @Autowired
     private DatasetRepository dr;
     
-    public List<Community> getCommunities(CommunityFilters communityFilters, BenchmarkingEventFilters benchmarkingEventFilters) {
+    public String age(){
+        return "hola";
+    }
+    
+    
+    
+    
+    public List<Community> getCommunities(CommunityFilters communityFilters) {
+        DataFetcher bevent = (DataFetcher<List<BenchmarkingEvent>>) (DataFetchingEnvironment environment) -> {
+            System.out.println(environment);
+            return null;
+        };
+        
         List<Community> c = new ArrayList<>();
-        c = cr.getCommunities(communityFilters);
+        c = cr.getCommunities(communityFilters);   
         for (Community com : c){
-            if(benchmarkingEventFilters==null){
-                benchmarkingEventFilters = new BenchmarkingEventFilters();
-            }
+            BenchmarkingEventFilters benchmarkingEventFilters = new BenchmarkingEventFilters();
             benchmarkingEventFilters.setCommunity_id(com.getId());
             List<BenchmarkingEvent> b = this.getBenchmarkingEvents(benchmarkingEventFilters);
-            com.setbEvents(b);
+            com.setBenchmarkingEvents(b);
         }
         return c;
     }
         
         
     public List<BenchmarkingEvent> getBenchmarkingEvents(BenchmarkingEventFilters benchmarkingEventFilters){
-        return br.getBenchmarkingEvents(benchmarkingEventFilters);
+        
+        List<BenchmarkingEvent> b = new ArrayList<>();
+        b = br.getBenchmarkingEvents(benchmarkingEventFilters);   
+        for (BenchmarkingEvent ben : b){
+            ChallengeFilters cf = new ChallengeFilters();
+            cf.setBenchmarking_event_id(ben.getId());
+            List<Challenge> c = this.getChallenges(cf);
+            ben.setChallenges(c);
+        }
+        return b;
     }
 
-    public List<Challenge> getChallengesByBEventId(String id) {
-        return chr.getChallengesByBEventId(id);
+    public List<Challenge> getChallenges(ChallengeFilters challengeFilters) {
+        List<Challenge> c = new ArrayList<>();
+        c = chr.getChallenges(challengeFilters);
+        for (Challenge cha : c){
+            DatasetFilters df = new DatasetFilters ();
+            df.setChallenge_id(cha.getId());
+            List<Dataset> d = this.getDatasets(df);
+            cha.setDatasets(d);   
+        }
+        return c;
     }
 
-    public List<Tool> getAllTools(){
-        return tr.findAll();
+    public List<Tool> getTools(ToolFilters toolFilters){
+        return tr.getTools(toolFilters);
     }
     
     public List<Dataset> getDatasets(DatasetFilters datasetFilters){

@@ -5,12 +5,14 @@
  */
 package com.comp.model.benchmarkingEvent;
 
+import com.mongodb.MongoClient;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Service;
 
 
 
@@ -18,14 +20,15 @@ import org.springframework.data.mongodb.core.query.Query;
  *
  * @author vsundesh
  */
+@Service
 public class BenchmarkingEventRepositoryImpl implements BenchmarkingEventRepositoryCustom {
 
     @Autowired
-    private MongoTemplate mt;
-
+    MongoTemplate mt;
 
     @Override
-    public List<BenchmarkingEvent> getBenchmarkingEvents(BenchmarkingEventFilters benchmarkingEventFilters){
+    public List<BenchmarkingEvent> getBenchmarkingEvents(BenchmarkingEventFilters benchmarkingEventFilters){                
+        
         List <BenchmarkingEvent> bevents = new ArrayList<>();
         Query query = new Query();
         if(benchmarkingEventFilters!=null){

@@ -24,6 +24,7 @@ type Challenge{
     benchmarking_event_id: String
     challenge_contact_ids: [String]
     references: [String]
+    datasets: [Dataset]
 }
 
 type CDates {
@@ -115,6 +116,11 @@ type Dataset{
     references: [String]
 }
 
+input ToolFilters {
+    id: String
+    community_id: String
+}
+
 input DatasetFilters {
     visibility: String
     community_id : String
@@ -131,6 +137,11 @@ input BenchmarkingEventFilters {
     community_id : String
 }
 
+input ChallengeFilters {
+    id: String
+    benchmarking_event_id: String
+}
+
 type Community {
     _id: String
     _schema: String
@@ -141,15 +152,22 @@ type Community {
     name: String
     community_contact_ids: [String]
     links: [Link]
-    bEvents: [BenchmarkingEvent]
+    benchmarkingEvents: [BenchmarkingEvent]
 }
 
 type Query{
 
-    getChallengesByBEventId(benchmarking_event_id: String): [Challenge]
-    getAllTools : [Tool]
-    getCommunities(communityFilters: CommunityFilters, benchmarkingEventFilters: BenchmarkingEventFilters) : [Community]
-    getDatasets(datasetFilters: DatasetFilters): [Dataset]
+    
+    getTools(toolFilters: ToolFilters) : [Tool]
+
+    getCommunities(communityFilters: CommunityFilters) : [Community]
+
     getBenchmarkingEvents(benchmarkingEventFilters: BenchmarkingEventFilters) : [BenchmarkingEvent]
+
+    getChallenges(challengeFilters: ChallengeFilters): [Challenge]
+
+    getDatasets(datasetFilters: DatasetFilters): [Dataset]
+
+    
 
 }

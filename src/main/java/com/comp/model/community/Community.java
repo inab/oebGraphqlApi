@@ -11,17 +11,28 @@ import com.comp.model.utils.Link;
 import com.comp.model.utils.MetricsCategory;
 import com.comp.model.utils.ReferenceTool;
 import com.comp.service.MongoService;
+import graphql.annotations.GraphQLField;
 import java.util.List;
+import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author vsundesh
  */
 @Document (collection="Community")
+@Component
 public class Community {
+
+   
+    
+    
+    
+    
     private String _id;
     private String _schema;
     private String name;
@@ -34,29 +45,39 @@ public class Community {
     private List<String> community_contact_ids;
     private List<MetricsCategory> metrics_categories;
     private List <ReferenceTool> reference_tools;
-    private List <BenchmarkingEvent> bEvents;
+    private List <BenchmarkingEvent> benchmarkingEvents;
+    //private MongoService ms;
 
+    
+          
+//    public List<BenchmarkingEvent> benchmarkingEvents(BenchmarkingEventFilters benchmarkingEventFilters){
+//        return ms.getBenchmarkingEvents(benchmarkingEventFilters);
+//    };
+
+    
+    
     
     public Community() {
     }
-
-    public Community(String _id, String _schema, String name, String acronym, String status, String description, List<String> keywords, List<Link> links, List<String> community_contact_ids, List<MetricsCategory> metrics_categories, List<ReferenceTool> reference_tools, List<BenchmarkingEvent> bEvents) {
-        this._id = _id;
-        this._schema = _schema;
-        this.name = name;
-        this.acronym = acronym;
-        this.status = status;
-        this.description = description;
-        this.keywords = keywords;
-        this.links = links;
-        this.community_contact_ids = community_contact_ids;
-        this.metrics_categories = metrics_categories;
-        this.reference_tools = reference_tools;
-        this.bEvents = bEvents;
+    
+    
+    public List<BenchmarkingEvent> getBenchmarkingEvents() {
+            return benchmarkingEvents;
     }
-    
-    
 
+
+    public void setBenchmarkingEvents(List<BenchmarkingEvent> benchmarkingEvents) {
+            this.benchmarkingEvents = benchmarkingEvents;
+    }
+
+//    public MongoService getMs() {
+//        return ms;
+//    }
+//
+//    public void setMs(MongoService ms) {
+//        this.ms = ms;
+//    }
+    
     public String getId() {
         return _id;
     }
@@ -145,13 +166,5 @@ public class Community {
         this.reference_tools = reference_tools;
     }
 
-    public List<BenchmarkingEvent> getbEvents() {
-        return bEvents;
-    }
-
-    public void setbEvents(List<BenchmarkingEvent> bEvents) {
-        this.bEvents = bEvents;
-    }
-    
     
 }

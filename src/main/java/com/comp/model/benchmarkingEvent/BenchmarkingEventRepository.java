@@ -6,6 +6,7 @@
 package com.comp.model.benchmarkingEvent;
 
 
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Repository;
  * @author vsundesh
  */
 @Repository
+@Configurable
 public interface BenchmarkingEventRepository extends BenchmarkingEventRepositoryCustom, MongoRepository<BenchmarkingEvent, String>{
     
 }

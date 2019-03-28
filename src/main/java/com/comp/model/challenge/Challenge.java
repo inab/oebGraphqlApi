@@ -5,6 +5,7 @@
  */
 package com.comp.model.challenge;
 
+import com.comp.model.dataset.Dataset;
 import java.util.List;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -25,23 +26,11 @@ public class Challenge {
     private String benchmarking_event_id;
     private List<String> challenge_contact_ids;
     private List<String> references;
-
-    public Challenge(String _id, String _schema, String orig_id, String name, Boolean is_automated, Dates dates, String url, String benchmarking_event_id, List<String> challenge_contact_ids, List<String> references) {
-        this._id = _id;
-        this._schema = _schema;
-        this.orig_id = orig_id;
-        this.name = name;
-        this.is_automated = is_automated;
-        this.dates = dates;
-        this.url = url;
-        this.benchmarking_event_id = benchmarking_event_id;
-        this.challenge_contact_ids = challenge_contact_ids;
-        this.references = references;
-    }
+    
+    private List<Dataset> datasets;
 
     public Challenge() {
     }
-    
 
     public String getId() {
         return _id;
@@ -122,6 +111,15 @@ public class Challenge {
     public void setReferences(List<String> references) {
         this.references = references;
     }
+
+    public List<Dataset> getDatasets() {
+        return datasets;
+    }
+
+    public void setDatasets(List<Dataset> datasets) {
+        this.datasets = datasets;
+    }
+
     
     
 }

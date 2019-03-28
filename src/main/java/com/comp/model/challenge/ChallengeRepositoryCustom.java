@@ -14,5 +14,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ChallengeRepositoryCustom {
-    public List<Challenge> getChallengesByBEventId(String id);
+    public List<Challenge> getChallenges(ChallengeFilters challengeFilters);
 }

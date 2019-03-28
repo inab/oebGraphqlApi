@@ -12,6 +12,10 @@ package com.comp.model.dataset;
 public class DatasetFilters {
     private String visibility;
     private String community_id;
+    private String type;
+    private String challenge_id;
+
+    
 
     public DatasetFilters() {
     }
@@ -31,6 +35,23 @@ public class DatasetFilters {
 
     public void setCommunity_id(String community_id) {
         this.community_id = community_id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+    
+    
+    public String getChallenge_id() {
+        return challenge_id;
+    }
+
+    public void setChallenge_id(String challenge_id) {
+        this.challenge_id = challenge_id;
     }
         
 }

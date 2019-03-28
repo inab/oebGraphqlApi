@@ -7,11 +7,13 @@ package com.comp.model.benchmarkingEvent;
 
 import com.comp.model.utils.*;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author vsundesh
  */
+@Component
 public class Dates {
     private String creation;
     private String modification;    

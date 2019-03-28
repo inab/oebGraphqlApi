@@ -3,20 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.comp.model.benchmarkingEvent;
-
-import org.springframework.stereotype.Component;
+package com.comp.model.tool;
 
 /**
  *
  * @author vsundesh
  */
-@Component
-public class BenchmarkingEventFilters {
+public class ToolFilters {
     private String id;
     private String community_id;
-
-    public BenchmarkingEventFilters() {
+    
+    public ToolFilters() {
     }
 
     public String getId() {
@@ -34,5 +31,9 @@ public class BenchmarkingEventFilters {
     public void setCommunity_id(String community_id) {
         this.community_id = community_id;
     }
+
+    
+
+    
     
 }

@@ -3,20 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.comp.model.benchmarkingEvent;
-
-import org.springframework.stereotype.Component;
+package com.comp.model.challenge;
 
 /**
  *
  * @author vsundesh
  */
-@Component
-public class BenchmarkingEventFilters {
+public class ChallengeFilters {
     private String id;
-    private String community_id;
+    private String benchmarking_event_id;
 
-    public BenchmarkingEventFilters() {
+    public ChallengeFilters() {
     }
 
     public String getId() {
@@ -27,12 +24,13 @@ public class BenchmarkingEventFilters {
         this.id = id;
     }
 
-    public String getCommunity_id() {
-        return community_id;
+    public String getBenchmarking_event_id() {
+        return benchmarking_event_id;
     }
 
-    public void setCommunity_id(String community_id) {
-        this.community_id = community_id;
+    public void setBenchmarking_event_id(String benchmarking_event_id) {
+        this.benchmarking_event_id = benchmarking_event_id;
     }
+    
     
 }

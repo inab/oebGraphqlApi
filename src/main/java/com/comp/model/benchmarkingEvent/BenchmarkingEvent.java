@@ -8,12 +8,14 @@ package com.comp.model.benchmarkingEvent;
 import com.comp.model.challenge.Challenge;
 import java.util.List;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author vsundesh
  */
 @Document (collection="BenchmarkingEvent")
+@Component
 public class BenchmarkingEvent {
     
     private String _id;

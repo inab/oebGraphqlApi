@@ -5,8 +5,12 @@
  */
 package com.comp.model.tool;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 
 /**
  *
@@ -16,6 +20,25 @@ public class ToolRepositoryImpl implements ToolRepositoryCustom{
     
     @Autowired
     private MongoTemplate mt;
+
+    @Override
+    public List<Tool> getTools(ToolFilters toolFilters) {
+        List <Tool> tools = new ArrayList<>();
+         Query query = new Query();
+        if(toolFilters!=null){
+            if(toolFilters.getId() !=null){
+                query.addCriteria(Criteria.where("_id").is(toolFilters.getId()));
+            }
+            if(toolFilters.getCommunity_id() !=null){
+                query.addCriteria(Criteria.where("community_id").is(toolFilters.getCommunity_id()));
+            }
+            tools = mt.find(query,Tool.class);
+            
+        }else{
+            tools = mt.findAll(Tool.class);
+        }
+        return tools;
+    }
     
     
     

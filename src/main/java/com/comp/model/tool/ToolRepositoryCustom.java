@@ -5,6 +5,7 @@
  */
 package com.comp.model.tool;
 
+import java.util.List;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -13,5 +14,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ToolRepositoryCustom {
-    
+    public List<Tool> getTools(ToolFilters toolFilters);
 }
