@@ -34,9 +34,9 @@ public class Query{
 //        return ms.getCommunities(communityFilters);
 //    }
     
-    public List<BenchmarkingEvent> getBenchmarkingEvents(BenchmarkingEventFilters benchmarkingEventFilters){
-        return ms.getBenchmarkingEvents(benchmarkingEventFilters);
-    }
+//    public List<BenchmarkingEvent> getBenchmarkingEvents(BenchmarkingEventFilters benchmarkingEventFilters){
+//        return ms.getBenchmarkingEvents(benchmarkingEventFilters);
+//    }
      
     public List<Challenge> getChallenges(ChallengeFilters challengeFilters){
         return ms.getChallenges(challengeFilters);

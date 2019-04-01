@@ -22,6 +22,7 @@ import com.comp.model.tool.Tool;
 import com.comp.model.tool.ToolFilters;
 import com.comp.model.tool.ToolRepository;
 import graphql.schema.DataFetcher;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import graphql.schema.DataFetchingEnvironment;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +53,9 @@ public class MongoService {
     
     @Autowired
     private DatasetRepository dr;
+    
+    @Autowired
+    ObjectMapper mapper;
     
     public String age(){
         return "hola";
@@ -111,8 +115,8 @@ public class MongoService {
         return dr.getDatasets(datasetFilters);
     }
 
-    public List<Community> getComs(DataFetchingEnvironment environment) {
-        System.out.println(environment);
-        return  cr.findAll();
+    public List<Community> getCommunities(DataFetchingEnvironment environment) {
+        CommunityFilters cf = mapper.convertValue(environment.getArgument("communityFilters"), CommunityFilters.class);
+        return cr.getCommunities(cf);
     };
 }

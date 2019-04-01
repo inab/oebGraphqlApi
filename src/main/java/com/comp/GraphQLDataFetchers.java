@@ -27,7 +27,8 @@ public class GraphQLDataFetchers {
     
     DataFetcher getCommunities() {
         return environment -> {
-            return  ms.getComs(environment);
+            
+            return  ms.getCommunities(environment);
         };
     }
 
