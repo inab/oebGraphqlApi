@@ -21,10 +21,9 @@ import com.comp.model.dataset.DatasetRepository;
 import com.comp.model.tool.Tool;
 import com.comp.model.tool.ToolFilters;
 import com.comp.model.tool.ToolRepository;
-import graphql.schema.DataFetcher;
+import com.comp.pagination.PaginationFilters;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import graphql.schema.DataFetchingEnvironment;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,66 +56,51 @@ public class MongoService {
     @Autowired
     ObjectMapper mapper;
     
-    public String age(){
-        return "hola";
+    public List<Tool> getTools(DataFetchingEnvironment environment){
+        ToolFilters tf = mapper.convertValue(environment.getArgument("toolFilters"), ToolFilters.class);
+        PaginationFilters pf = mapper.convertValue(environment.getArgument("pagination"), PaginationFilters.class);
+        return tr.getTools(tf,pf);
     }
     
-    
-    
-    
-//    public List<Community> getCommunities(CommunityFilters communityFilters) {
-//        DataFetcher bevent = (DataFetcher<List<BenchmarkingEvent>>) (DataFetchingEnvironment environment) -> {
-//            System.out.println(environment);
-//            return null;
-//        };
-//        
-//        List<Community> c = new ArrayList<>();
-//        c = cr.getCommunities(communityFilters);   
-//        for (Community com : c){
-//            BenchmarkingEventFilters benchmarkingEventFilters = new BenchmarkingEventFilters();
-//            benchmarkingEventFilters.setCommunity_id(com.getId());
-//            List<BenchmarkingEvent> b = this.getBenchmarkingEvents(benchmarkingEventFilters);
-//            com.setBenchmarkingEvents(b);
-//        }
-//        return c;
-//    }
-        
-        
-    public List<BenchmarkingEvent> getBenchmarkingEvents(BenchmarkingEventFilters benchmarkingEventFilters){
-        
-        List<BenchmarkingEvent> b = new ArrayList<>();
-        b = br.getBenchmarkingEvents(benchmarkingEventFilters);   
-        for (BenchmarkingEvent ben : b){
-            ChallengeFilters cf = new ChallengeFilters();
-            cf.setBenchmarking_event_id(ben.getId());
-            List<Challenge> c = this.getChallenges(cf);
-            ben.setChallenges(c);
-        }
-        return b;
-    }
-
-    public List<Challenge> getChallenges(ChallengeFilters challengeFilters) {
-        List<Challenge> c = new ArrayList<>();
-        c = chr.getChallenges(challengeFilters);
-        for (Challenge cha : c){
-            DatasetFilters df = new DatasetFilters ();
-            df.setChallenge_id(cha.getId());
-            List<Dataset> d = this.getDatasets(df);
-            cha.setDatasets(d);   
-        }
-        return c;
-    }
-
-    public List<Tool> getTools(ToolFilters toolFilters){
-        return tr.getTools(toolFilters);
-    }
-    
-    public List<Dataset> getDatasets(DatasetFilters datasetFilters){
-        return dr.getDatasets(datasetFilters);
-    }
-
     public List<Community> getCommunities(DataFetchingEnvironment environment) {
         CommunityFilters cf = mapper.convertValue(environment.getArgument("communityFilters"), CommunityFilters.class);
-        return cr.getCommunities(cf);
+        PaginationFilters pf = mapper.convertValue(environment.getArgument("pagination"), PaginationFilters.class);
+        return cr.getCommunities(cf,pf);
     };
+
+    public List<BenchmarkingEvent> getBenchmarkingEvents(DataFetchingEnvironment environment) {
+        BenchmarkingEventFilters bf = new BenchmarkingEventFilters();
+        Community c = environment.getSource();
+        if(c != null){
+            bf.setCommunity_id(c.getId());
+        } else {
+            bf = mapper.convertValue(environment.getArgument("benchmarkingEventFilters"), BenchmarkingEventFilters.class);
+        }
+        PaginationFilters pf = mapper.convertValue(environment.getArgument("pagination"), PaginationFilters.class);
+        return br.getBenchmarkingEvents(bf, pf);
+    }
+    
+    public List<Challenge> getChallenges(DataFetchingEnvironment environment) {
+        ChallengeFilters chf = new ChallengeFilters();
+        BenchmarkingEvent b = environment.getSource();
+        if(b != null){
+            chf.setBenchmarking_event_id(b.getId());
+        } else {
+            chf = mapper.convertValue(environment.getArgument("challengeFilters"), ChallengeFilters.class);
+        }
+        PaginationFilters pf = mapper.convertValue(environment.getArgument("pagination"), PaginationFilters.class);
+        return chr.getChallenges(chf,pf);
+    }
+    
+    public List<Dataset> getDatasets(DataFetchingEnvironment environment){
+        DatasetFilters dsf = new DatasetFilters();
+        Challenge ch = environment.getSource();
+        if(ch != null){
+            dsf.setChallenge_id(ch.getId());
+        } else {
+            dsf = mapper.convertValue(environment.getArgument("datasetFilters"), DatasetFilters.class);
+        }
+        PaginationFilters pf = mapper.convertValue(environment.getArgument("pagination"), PaginationFilters.class);
+        return dr.getDatasets(dsf,pf);
+    }
 }

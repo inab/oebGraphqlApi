@@ -5,6 +5,7 @@
  */
 package com.comp.model.benchmarkingEvent;
 
+import com.comp.pagination.PaginationFilters;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
@@ -14,5 +15,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface BenchmarkingEventRepositoryCustom {
-    List<BenchmarkingEvent> getBenchmarkingEvents(BenchmarkingEventFilters benchmarkingEventFilters);
+    List<BenchmarkingEvent> getBenchmarkingEvents(BenchmarkingEventFilters benchmarkingEventFilters, PaginationFilters paginationFilters);
 }

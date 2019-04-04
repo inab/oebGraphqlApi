@@ -6,6 +6,7 @@
 package com.comp.model.community;
 
 import com.comp.model.benchmarkingEvent.BenchmarkingEventFilters;
+import com.comp.pagination.PaginationFilters;
 import java.util.List;
 
 /**

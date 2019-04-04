@@ -5,6 +5,7 @@
  */
 package com.comp.model.challenge;
 
+import com.comp.pagination.PaginationFilters;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 
@@ -14,5 +15,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ChallengeRepositoryCustom {
-    public List<Challenge> getChallenges(ChallengeFilters challengeFilters);
+    public List<Challenge> getChallenges(ChallengeFilters challengeFilters, PaginationFilters pagination);
 }

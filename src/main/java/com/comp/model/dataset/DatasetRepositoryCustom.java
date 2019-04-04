@@ -5,6 +5,7 @@
  */
 package com.comp.model.dataset;
 
+import com.comp.pagination.PaginationFilters;
 import java.util.List;
 
 /**
@@ -12,5 +13,5 @@ import java.util.List;
  * @author vsundesh
  */
 public interface DatasetRepositoryCustom {
-    List<Dataset> getDatasets(DatasetFilters datasetFilters);
+    List<Dataset> getDatasets(DatasetFilters datasetFilters, PaginationFilters pagination);
 }

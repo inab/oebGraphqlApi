@@ -5,13 +5,8 @@
  */
 package com.comp;
 
-import com.comp.model.community.Community;
 import com.comp.service.MongoService;
 import graphql.schema.DataFetcher;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,10 +22,31 @@ public class GraphQLDataFetchers {
     
     DataFetcher getCommunities() {
         return environment -> {
-            
             return  ms.getCommunities(environment);
         };
     }
 
-    
+    DataFetcher getBenchmarkingEvents() {
+        return environment -> {
+            return  ms.getBenchmarkingEvents(environment);
+        };
+    }
+
+    DataFetcher getChallenges() {
+        return environment -> {
+            return  ms.getChallenges(environment);
+        };
+    }
+
+    DataFetcher getDatasets() {
+        return environment -> {
+            return  ms.getDatasets(environment);
+        };
+    }
+
+    DataFetcher getTools() {
+        return environment -> {
+            return  ms.getTools(environment);
+        };
+    }
 }

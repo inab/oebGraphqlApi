@@ -5,6 +5,8 @@
  */
 package com.comp.model.tool;
 
+import com.comp.pagination.PaginationFilters;
+import com.comp.pagination.PaginationMethods;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +24,14 @@ public class ToolRepositoryImpl implements ToolRepositoryCustom{
     private MongoTemplate mt;
 
     @Override
-    public List<Tool> getTools(ToolFilters toolFilters) {
+    public List<Tool> getTools(ToolFilters toolFilters, PaginationFilters paginationFilters) {
         List <Tool> tools = new ArrayList<>();
          Query query = new Query();
+         
+        if(paginationFilters != null){
+            query = PaginationMethods.paginationQueryBuilder(query, paginationFilters);
+        }
+         
         if(toolFilters!=null){
             if(toolFilters.getId() !=null){
                 query.addCriteria(Criteria.where("_id").is(toolFilters.getId()));
@@ -32,11 +39,9 @@ public class ToolRepositoryImpl implements ToolRepositoryCustom{
             if(toolFilters.getCommunity_id() !=null){
                 query.addCriteria(Criteria.where("community_id").is(toolFilters.getCommunity_id()));
             }
-            tools = mt.find(query,Tool.class);
-            
-        }else{
-            tools = mt.findAll(Tool.class);
         }
+        
+        tools = mt.find(query,Tool.class);
         return tools;
     }
     

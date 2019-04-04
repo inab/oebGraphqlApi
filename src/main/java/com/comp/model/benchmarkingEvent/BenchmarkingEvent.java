@@ -28,30 +28,8 @@ public class BenchmarkingEvent {
     private String community_id;
     private List<String> bench_contact_ids;
     private List<String> references;
-    private List<Challenge> challenges;
 
     public BenchmarkingEvent() {
-    }
-
-    public BenchmarkingEvent(String _id, String _schema, String orig_id, String name, Boolean is_automated, Dates dates, String url, String community_id, List<String> bench_contact_ids, List<String> references) {
-        this._id = _id;
-        this._schema = _schema;
-        this.orig_id = orig_id;
-        this.name = name;
-        this.is_automated = is_automated;
-        this.dates = dates;
-        this.url = url;
-        this.community_id = community_id;
-        this.bench_contact_ids = bench_contact_ids;
-        this.references = references;
-    }
-
-    public List<Challenge> getChallenges() {
-        return challenges;
-    }
-
-    public void setChallenges(List<Challenge> challenges) {
-        this.challenges = challenges;
     }
 
     public String getId() {

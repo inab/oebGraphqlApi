@@ -1,6 +1,69 @@
-"""
+input DatasetFilters {
+    visibility: String
+    community_id : String
+}
+
+input ChallengeFilters {
+    id: String
+    benchmarking_event_id: String
+}
+
+input CommunityFilters {
+    id: String
+    keywords: [String]
+    status: String    
+}
+
+input PaginationFilters {
+    skip: Int
+    limit: Int
+}
+
+input BenchmarkingEventFilters {
+    id: String
+    community_id : String
+}
+
+input ToolFilters {
+    id: String
+    community_id: String
+}
+
+type RelDatasetId {
+    dataset_id: String
+    role: String
+}
+
+type Datalink{
+    attrs: [String]
+    validation_date: String
+    status: String
+    uri: [String]
+}
+
+type Dates{
+    creation: String
+    modification: String
+    _public: String
+}
+
+type ToolAccess{
+    tool_access_type: String
+    link: String
+    techdocs: [Link]
+}
 
 
+type Link {
+    label: String
+    uri: String
+}
+
+type DependsOn {
+    metrics_id: String
+    tool_id: String
+    rel_dataset_ids: [RelDatasetId]
+}
 
 type BDates {
     creation: String
@@ -8,6 +71,14 @@ type BDates {
     _public: String
     benchmark_start: String
     benchmark_stop: String
+}
+
+type CDates {
+    creation: String
+    modification: String
+    _public: String
+    challenge_start: String
+    challenge_stop: String
 }
 
 type Challenge{
@@ -21,15 +92,7 @@ type Challenge{
     benchmarking_event_id: String
     challenge_contact_ids: [String]
     references: [String]
-    datasets: [Dataset]
-}
-
-type CDates {
-    creation: String
-    modification: String
-    _public: String
-    challenge_start: String
-    challenge_stop: String
+    datasets(pagination: PaginationFilters): [Dataset]
 }
 
 type BenchmarkingEvent {
@@ -43,56 +106,20 @@ type BenchmarkingEvent {
     community_id: String
     bench_contact_ids: [String]
     references: [String]
-    challenges: [Challenge]
+    challenges(pagination: PaginationFilters): [Challenge]
 }
 
-
-
-
-
-type ToolAccess{
-    tool_access_type: String
-    link: String
-    techdocs: [Link]
-}
-
-type Tool {
+type Community {
     _id: String
     _schema: String
-    registry_tool_id: String
-    name: String
     description: String
-    is_automated: Boolean
-    tool_contact_ids: [String]
+    acronym: String
     status: String
-    activation: String
-    deactivation: String
-    references: [String]
-    tool_access: [ToolAccess]
-}
-
-type Dates{
-    creation: String
-    modification: String
-    _public: String
-}
-
-type Datalink{
-    attrs: [String]
-    validation_date: String
-    status: String
-    uri: [String]
-}
-
-type RelDatasetId {
-    dataset_id: String
-    role: String
-}
-
-type DependsOn {
-    metrics_id: String
-    tool_id: String
-    rel_dataset_ids: [RelDatasetId]
+    keywords: [String]
+    name: String
+    community_contact_ids: [String]
+    links: [Link]
+    benchmarkingEvents(pagination: PaginationFilters): [BenchmarkingEvent]
 }
 
 type Dataset{
@@ -113,61 +140,31 @@ type Dataset{
     references: [String]
 }
 
-input ToolFilters {
-    id: String
-    community_id: String
-}
 
-input DatasetFilters {
-    visibility: String
-    community_id : String
-}
-
-
-input BenchmarkingEventFilters {
-    id: String
-    community_id : String
-}
-
-input ChallengeFilters {
-    id: String
-    benchmarking_event_id: String
-}
-"""
-input CommunityFilters {
-    id: String
-    keywords: [String]
-    status: String
-    
-}
-
-type Link {
-    label: String
-    uri: String
-}
-
-type Community {
+type Tool {
     _id: String
     _schema: String
-    description: String
-    acronym: String
-    status: String
-    keywords: [String]
+    registry_tool_id: String
     name: String
-    community_contact_ids: [String]
-    links: [Link]
+    description: String
+    is_automated: Boolean
+    tool_contact_ids: [String]
+    status: String
+    activation: String
+    deactivation: String
+    references: [String]
+    tool_access: [ToolAccess]
 }
 
 type Query{
+    getCommunities(communityFilters: CommunityFilters, pagination: PaginationFilters) : [Community]
 
+    getBenchmarkingEvents(benchmarkingEventFilters: BenchmarkingEventFilters, pagination: PaginationFilters) : [BenchmarkingEvent]
+
+    getChallenges(challengeFilters: ChallengeFilters, pagination: PaginationFilters): [Challenge]
+
+    getDatasets(datasetFilters: DatasetFilters, pagination: PaginationFilters): [Dataset]
     
-    #getTools(toolFilters: ToolFilters) : [Tool]
-
-    getCommunities(communityFilters: CommunityFilters) : [Community]
-
-    #getBenchmarkingEvents(benchmarkingEventFilters: BenchmarkingEventFilters) : [BenchmarkingEvent]
-
-    #getChallenges(challengeFilters: ChallengeFilters): [Challenge]
-
-    #getDatasets(datasetFilters: DatasetFilters): [Dataset]
+    getTools(toolFilters: ToolFilters, pagination: PaginationFilters) : [Tool]
+    
 }

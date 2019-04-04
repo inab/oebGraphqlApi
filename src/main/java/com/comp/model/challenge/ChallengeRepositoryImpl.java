@@ -6,6 +6,8 @@
 package com.comp.model.challenge;
 
 
+import com.comp.pagination.PaginationFilters;
+import com.comp.pagination.PaginationMethods;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +25,15 @@ public class ChallengeRepositoryImpl implements ChallengeRepositoryCustom {
     private MongoTemplate mt;
 
     @Override
-    public List<Challenge> getChallenges(ChallengeFilters challengeFilters) {
+    public List<Challenge> getChallenges(ChallengeFilters challengeFilters, PaginationFilters paginationFilters) {
         
-         List <Challenge> challenges = new ArrayList<>();
+        List <Challenge> challenges = new ArrayList<>();
         Query query = new Query();
+        
+        if(paginationFilters != null){
+            query = PaginationMethods.paginationQueryBuilder(query, paginationFilters);
+        }
+        
         if(challengeFilters!=null){
             if(challengeFilters.getId()!=null){
                 query.addCriteria(Criteria.where("_id").is(challengeFilters.getId()));
@@ -34,12 +41,9 @@ public class ChallengeRepositoryImpl implements ChallengeRepositoryCustom {
             if(challengeFilters.getBenchmarking_event_id()!=null){
                 query.addCriteria(Criteria.where("benchmarking_event_id").is(challengeFilters.getBenchmarking_event_id()));
             }
-//            System.out.println(query.toString());
-            challenges = mt.find(query,Challenge.class);
-            System.out.println(query);
-        }else{
-            challenges = mt.findAll(Challenge.class);
         }
+        
+        challenges = mt.find(query,Challenge.class);
         return challenges;
     }
 }

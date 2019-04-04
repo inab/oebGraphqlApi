@@ -5,6 +5,8 @@
  */
 package com.comp.model.dataset;
 
+import com.comp.pagination.PaginationFilters;
+import com.comp.pagination.PaginationMethods;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +24,14 @@ public class DatasetRepositoryImpl implements DatasetRepositoryCustom {
     private MongoTemplate mt;
 
     @Override
-    public List<Dataset> getDatasets(DatasetFilters datasetFilters) {
-         
+    public List<Dataset> getDatasets(DatasetFilters datasetFilters, PaginationFilters paginationFilters) {
          List <Dataset> datasets = new ArrayList<>();
          Query query = new Query();
+         
+         if(paginationFilters != null){
+            query = PaginationMethods.paginationQueryBuilder(query, paginationFilters);
+        }
+         
         if(datasetFilters!=null){
             if(datasetFilters.getVisibility()!=null){
                 query.addCriteria(Criteria.where("visibility").is(datasetFilters.getVisibility()));
@@ -36,11 +42,9 @@ public class DatasetRepositoryImpl implements DatasetRepositoryCustom {
             if(datasetFilters.getChallenge_id()!=null){
                 query.addCriteria(Criteria.where("challenge_id").in(datasetFilters.getChallenge_id()));
             }
-            datasets = mt.find(query,Dataset.class);
-            
-        }else{
-            datasets = mt.findAll(Dataset.class);
         }
+        
+        datasets = mt.find(query,Dataset.class);
         return datasets;
     }
 }

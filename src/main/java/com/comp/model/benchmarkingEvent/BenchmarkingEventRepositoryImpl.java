@@ -5,6 +5,8 @@
  */
 package com.comp.model.benchmarkingEvent;
 
+import com.comp.pagination.PaginationFilters;
+import com.comp.pagination.PaginationMethods;
 import com.mongodb.MongoClient;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +29,17 @@ public class BenchmarkingEventRepositoryImpl implements BenchmarkingEventReposit
     MongoTemplate mt;
 
     @Override
-    public List<BenchmarkingEvent> getBenchmarkingEvents(BenchmarkingEventFilters benchmarkingEventFilters){                
+    public List<BenchmarkingEvent> getBenchmarkingEvents(BenchmarkingEventFilters benchmarkingEventFilters,
+            PaginationFilters paginationFilters){  
         
         List <BenchmarkingEvent> bevents = new ArrayList<>();
         Query query = new Query();
+        
+        if(paginationFilters != null){
+            query = PaginationMethods.paginationQueryBuilder(query, paginationFilters);
+        }
+         
+        
         if(benchmarkingEventFilters!=null){
             if(benchmarkingEventFilters.getId()!=null){
                 query.addCriteria(Criteria.where("_id").is(benchmarkingEventFilters.getId()));
@@ -38,12 +47,9 @@ public class BenchmarkingEventRepositoryImpl implements BenchmarkingEventReposit
             if(benchmarkingEventFilters.getCommunity_id()!=null){
                 query.addCriteria(Criteria.where("community_id").is(benchmarkingEventFilters.getCommunity_id()));
             }
-//            System.out.println(query.toString());
-            bevents = mt.find(query,BenchmarkingEvent.class);
-            
-        }else{
-            bevents = mt.findAll(BenchmarkingEvent.class);
         }
+        
+        bevents = mt.find(query,BenchmarkingEvent.class);
         return bevents;
     }
 }

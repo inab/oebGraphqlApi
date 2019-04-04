@@ -26,8 +26,7 @@ public class Challenge {
     private String benchmarking_event_id;
     private List<String> challenge_contact_ids;
     private List<String> references;
-    
-    private List<Dataset> datasets;
+
 
     public Challenge() {
     }
@@ -110,14 +109,6 @@ public class Challenge {
 
     public void setReferences(List<String> references) {
         this.references = references;
-    }
-
-    public List<Dataset> getDatasets() {
-        return datasets;
-    }
-
-    public void setDatasets(List<Dataset> datasets) {
-        this.datasets = datasets;
     }
 
     

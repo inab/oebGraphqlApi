@@ -5,17 +5,10 @@
  */
 package com.comp.model.community;
 
-import com.comp.model.benchmarkingEvent.BenchmarkingEvent;
-import com.comp.model.benchmarkingEvent.BenchmarkingEventFilters;
 import com.comp.model.utils.Link;
 import com.comp.model.utils.MetricsCategory;
 import com.comp.model.utils.ReferenceTool;
-import com.comp.service.MongoService;
-import graphql.annotations.GraphQLField;
 import java.util.List;
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.stereotype.Component;
@@ -45,7 +38,6 @@ public class Community {
     private List<String> community_contact_ids;
     private List<MetricsCategory> metrics_categories;
     private List <ReferenceTool> reference_tools;
-//    private List <BenchmarkingEvent> benchmarkingEvents;
 
     
     
@@ -53,16 +45,6 @@ public class Community {
     public Community() {
     }
     
-    
-//    public List<BenchmarkingEvent> getBenchmarkingEvents() {
-//            return benchmarkingEvents;
-//    }
-//
-//
-//    public void setBenchmarkingEvents(List<BenchmarkingEvent> benchmarkingEvents) {
-//            this.benchmarkingEvents = benchmarkingEvents;
-//    }
-
     
     public String getId() {
         return _id;
