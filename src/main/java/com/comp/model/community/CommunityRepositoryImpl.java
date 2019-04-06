@@ -46,7 +46,7 @@ public class CommunityRepositoryImpl implements CommunityRepositoryCustom {
                 query.addCriteria(Criteria.where("status").is(communityFilters.getStatus()));
             }
         }
-        
+
         comms = mt.find(query,Community.class);
         return comms;
     }
