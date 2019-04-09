@@ -42,6 +42,9 @@ public class DatasetRepositoryImpl implements DatasetRepositoryCustom {
             if(datasetFilters.getChallenge_id()!=null){
                 query.addCriteria(Criteria.where("challenge_id").in(datasetFilters.getChallenge_id()));
             }
+            if(datasetFilters.getType()!=null){
+                query.addCriteria(Criteria.where("type").is(datasetFilters.getType()));
+            }
         }
         
         datasets = mt.find(query,Dataset.class);

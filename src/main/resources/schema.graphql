@@ -1,6 +1,8 @@
 input DatasetFilters {
     visibility: String
     community_id : String
+    challenge_id : String
+    type: String
 }
 
 input ChallengeFilters {

@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.query.Query;
 public class PaginationMethods {
     
     public static Query paginationQueryBuilder(Query query, PaginationFilters paginationFilters){
+        
         if(paginationFilters.getSkip()!=null){
             query.skip(paginationFilters.getSkip());
         }
