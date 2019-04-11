@@ -15,6 +15,8 @@ import graphql.schema.idl.SchemaParser;
 import graphql.schema.idl.TypeDefinitionRegistry;
 import java.io.IOException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -32,9 +34,14 @@ public class GraphQLProvider {
     private GraphQL graphQL;
 
     @PostConstruct
-    public void init() throws IOException {
+    public void init() {
         URL url = Resources.getResource("schema.graphql");
-        String sdl = Resources.toString(url, Charsets.UTF_8);
+        String sdl = null;
+        try {
+            sdl = Resources.toString(url, Charsets.UTF_8);
+        } catch (IOException ex) {
+            Logger.getLogger(GraphQLProvider.class.getName()).log(Level.SEVERE, null, ex);
+        }
         GraphQLSchema graphQLSchema = buildSchema(sdl);
         this.graphQL = GraphQL.newGraphQL(graphQLSchema).build();
     }
