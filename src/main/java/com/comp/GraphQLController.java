@@ -5,6 +5,7 @@
  */
 package com.comp;
 
+import com.fasterxml.jackson.core.JsonParser.Feature;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import graphql.ExecutionInput;
@@ -34,7 +35,7 @@ public class GraphQLController {
     @Autowired
     public GraphQLController(GraphQL graphql, ObjectMapper objectMapper) {
         this.graphql = graphql;
-        this.objectMapper = objectMapper;
+        this.objectMapper = objectMapper.configure(Feature.ALLOW_UNQUOTED_CONTROL_CHARS, true);
     }
 
     @RequestMapping(value = "/graphql", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -54,6 +55,7 @@ public class GraphQLController {
     @RequestMapping(value = "/graphql", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @CrossOrigin
     public Map<String, Object> graphql(@RequestBody Map<String, Object> body) {
+        
         String query = (String) body.get("query");
         if (query == null) {
             query = "";

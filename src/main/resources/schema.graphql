@@ -31,6 +31,11 @@ input ToolFilters {
     community_id: String
 }
 
+input MetricsFilters {
+    id: String
+    community_id: String    
+}
+
 type RelDatasetId {
     dataset_id: String
     role: String
@@ -158,6 +163,28 @@ type Tool {
     tool_access: [ToolAccess]
 }
 
+type Implementation {
+    tool_id: String
+    community_ids: [String]
+}
+
+type Metrics {
+    _id: String
+    _schema: String
+    orig_id: String
+    title: String
+    description: String
+    metrics_contact_ids: [String]
+    formal_definition: String
+    implementation: [Implementation]
+    execution_type: String
+    data_schemas: String
+    links: [Link]
+    references: [String]
+    representation_hints : String
+    community_id: String
+}
+
 type Query{
     getCommunities(communityFilters: CommunityFilters, pagination: PaginationFilters) : [Community]
 
@@ -168,5 +195,7 @@ type Query{
     getDatasets(datasetFilters: DatasetFilters, pagination: PaginationFilters): [Dataset]
     
     getTools(toolFilters: ToolFilters, pagination: PaginationFilters) : [Tool]
+
+    getMetrics(metricsFilters: MetricsFilters, pagination: PaginationFilters) : [Metrics]
     
 }

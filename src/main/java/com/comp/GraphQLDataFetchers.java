@@ -49,4 +49,10 @@ public class GraphQLDataFetchers {
             return  ms.getTools(environment);
         };
     }
+
+    DataFetcher getMetrics() {
+        return environment -> {
+            return  ms.getMetrics(environment);
+        };
+    }
 }

@@ -18,11 +18,15 @@ import com.comp.model.community.CommunityRepository;
 import com.comp.model.dataset.Dataset;
 import com.comp.model.dataset.DatasetFilters;
 import com.comp.model.dataset.DatasetRepository;
+import com.comp.model.metrics.Metrics;
+import com.comp.model.metrics.MetricsFilters;
+import com.comp.model.metrics.MetricsRepository;
 import com.comp.model.tool.Tool;
 import com.comp.model.tool.ToolFilters;
 import com.comp.model.tool.ToolRepository;
 import com.comp.pagination.PaginationFilters;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +56,9 @@ public class MongoService {
     
     @Autowired
     private DatasetRepository dr;
+    
+    @Autowired
+    private MetricsRepository mr;
     
     @Autowired
     ObjectMapper mapper;
@@ -102,5 +109,11 @@ public class MongoService {
         }
         PaginationFilters pf = mapper.convertValue(environment.getArgument("pagination"), PaginationFilters.class);
         return dr.getDatasets(dsf,pf);
+    }
+
+    public List<Metrics> getMetrics(DataFetchingEnvironment environment) {
+        MetricsFilters mf = mapper.convertValue(environment.getArgument("metricsFilters"), MetricsFilters.class);
+        PaginationFilters pf = mapper.convertValue(environment.getArgument("pagination"), PaginationFilters.class);
+        return mr.getMetrics(mf, pf);
     }
 }

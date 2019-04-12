@@ -55,26 +55,24 @@ public class GraphQLProvider {
 
     private RuntimeWiring buildWiring() {
         return RuntimeWiring.newRuntimeWiring()
-                .type("Query",typeWiring -> typeWiring       
-                        .dataFetcher("getCommunities", graphQLDataFetchers.getCommunities())
-                        .dataFetcher("getBenchmarkingEvents",graphQLDataFetchers.getBenchmarkingEvents())
-                        .dataFetcher("getChallenges",graphQLDataFetchers.getChallenges())
-                        .dataFetcher("getDatasets",graphQLDataFetchers.getDatasets())
-                        .dataFetcher("getTools",graphQLDataFetchers.getTools())
-                )
-                .type("Community",typeWiring -> typeWiring
-                        .dataFetcher("benchmarkingEvents", graphQLDataFetchers.getBenchmarkingEvents())
-                )
-                .type("BenchmarkingEvent",typeWiring -> typeWiring
-                        .dataFetcher("challenges",graphQLDataFetchers.getChallenges())
-                )
-                .type("Challenge", typeWiring -> typeWiring
-                        .dataFetcher("datasets",graphQLDataFetchers.getDatasets())
-                )
-                
-                
-                .build();
-
+            .type("Query",typeWiring -> typeWiring       
+                    .dataFetcher("getCommunities", graphQLDataFetchers.getCommunities())
+                    .dataFetcher("getBenchmarkingEvents",graphQLDataFetchers.getBenchmarkingEvents())
+                    .dataFetcher("getChallenges",graphQLDataFetchers.getChallenges())
+                    .dataFetcher("getDatasets",graphQLDataFetchers.getDatasets())
+                    .dataFetcher("getTools",graphQLDataFetchers.getTools())
+                    .dataFetcher("getMetrics", graphQLDataFetchers.getMetrics())
+            )
+            .type("Community",typeWiring -> typeWiring
+                    .dataFetcher("benchmarkingEvents", graphQLDataFetchers.getBenchmarkingEvents())
+            )
+            .type("BenchmarkingEvent",typeWiring -> typeWiring
+                    .dataFetcher("challenges",graphQLDataFetchers.getChallenges())
+            )
+            .type("Challenge", typeWiring -> typeWiring
+                    .dataFetcher("datasets",graphQLDataFetchers.getDatasets())
+            )
+            .build();
     }
 
     @Bean

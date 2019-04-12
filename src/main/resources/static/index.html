@@ -112,7 +112,7 @@
     function graphQLFetcher(graphQLParams) {
         // This example expects a GraphQL server at the path /graphql.
         // Change this to point wherever you host your GraphQL server.
-        return fetch('/sciapi/graphql', {
+        return fetch(window.location.href+'/graphql', {
             method: 'post',
             headers: {
                 'Accept': 'application/json',
