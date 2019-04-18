@@ -8,6 +8,7 @@ package com.comp;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import graphql.GraphQL;
+import graphql.scalars.ExtendedScalars;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
 import graphql.schema.idl.SchemaGenerator;
@@ -48,13 +49,16 @@ public class GraphQLProvider {
 
     private GraphQLSchema buildSchema(String sdl) {
         TypeDefinitionRegistry typeRegistry = new SchemaParser().parse(sdl);
+        
         RuntimeWiring runtimeWiring = buildWiring();
+
         SchemaGenerator schemaGenerator = new SchemaGenerator();
         return schemaGenerator.makeExecutableSchema(typeRegistry, runtimeWiring);
     }
 
     private RuntimeWiring buildWiring() {
         return RuntimeWiring.newRuntimeWiring()
+            .scalar(ExtendedScalars.Json)
             .type("Query",typeWiring -> typeWiring       
                     .dataFetcher("getCommunities", graphQLDataFetchers.getCommunities())
                     .dataFetcher("getBenchmarkingEvents",graphQLDataFetchers.getBenchmarkingEvents())
