@@ -34,7 +34,7 @@ public class Community {
     private String description;
     private List<String> keywords;
     private List<Link> links;
-    @Field("community_contacts")
+    private List<String> references;
     private List<String> community_contact_ids;
     private List<MetricsCategory> metrics_categories;
     private List <ReferenceTool> reference_tools;
@@ -108,6 +108,14 @@ public class Community {
 
     public void setLinks(List<Link> links) {
         this.links = links;
+    }
+
+    public List<String> getReferences() {
+        return references;
+    }
+
+    public void setReferences(List<String> references) {
+        this.references = references;
     }
 
     public List<String> getCommunity_contact_ids() {

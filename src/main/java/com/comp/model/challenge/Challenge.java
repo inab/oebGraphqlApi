@@ -6,6 +6,7 @@
 package com.comp.model.challenge;
 
 import com.comp.model.dataset.Dataset;
+import com.comp.model.utils.MetricsCategory;
 import java.util.List;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -18,11 +19,14 @@ public class Challenge {
     
     private String _id;
     private String _schema;
+    private String acronym;
     private String orig_id;
+    private String description;
     private String name;
     private Boolean is_automated;
     private Dates dates;
     private String url;
+    private MetricsCategory metrics_category;
     private String benchmarking_event_id;
     private List<String> challenge_contact_ids;
     private List<String> references;
@@ -47,6 +51,14 @@ public class Challenge {
         this._schema = _schema;
     }
 
+    public String getAcronym() {
+        return acronym;
+    }
+
+    public void setAcronym(String acronym) {
+        this.acronym = acronym;
+    }
+    
     public String getOrig_id() {
         return orig_id;
     }
@@ -54,7 +66,15 @@ public class Challenge {
     public void setOrig_id(String orig_id) {
         this.orig_id = orig_id;
     }
+    
+    public String getDescription() {
+        return description;
+    }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    
     public String getName() {
         return name;
     }
@@ -87,6 +107,16 @@ public class Challenge {
         this.url = url;
     }
 
+    public MetricsCategory getMetrics_category() {
+        return metrics_category;
+    }
+
+    public void setMetrics_category(MetricsCategory metrics_category) {
+        this.metrics_category = metrics_category;
+    }
+    
+    
+
     public String getBenchmarking_event_id() {
         return benchmarking_event_id;
     }
@@ -111,6 +141,6 @@ public class Challenge {
         this.references = references;
     }
 
-    
+   
     
 }

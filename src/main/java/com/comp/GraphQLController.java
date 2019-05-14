@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @author vsundesh
  */
 @RestController
-
 public class GraphQLController {
     private final GraphQL graphql;
     private final ObjectMapper objectMapper;

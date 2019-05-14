@@ -21,6 +21,7 @@ public class Contact {
     public String givenName;
     public String surname;
     public List<String> email;
+    public String community_id;
     public String notes;
     public List<Link> links;
     

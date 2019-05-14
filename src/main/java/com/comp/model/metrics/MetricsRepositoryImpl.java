@@ -37,7 +37,7 @@ public class MetricsRepositoryImpl implements MetricsRepositoryCustom{
                 query.addCriteria(Criteria.where("_id").is(metricsFilters.getId()));
             }
             if(metricsFilters.getCommunity_id()!=null){
-                query.addCriteria(Criteria.where("community_id").is(metricsFilters.getCommunity_id()));
+                query.addCriteria(Criteria.where("implementations").elemMatch(Criteria.where("community_id").is(metricsFilters.getCommunity_id())));
             }
         }
         

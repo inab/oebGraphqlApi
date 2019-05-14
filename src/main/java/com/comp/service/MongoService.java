@@ -26,7 +26,6 @@ import com.comp.model.tool.ToolFilters;
 import com.comp.model.tool.ToolRepository;
 import com.comp.pagination.PaginationFilters;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +39,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class MongoService {
     
-    
-
     @Autowired
     private CommunityRepository cr;
 
@@ -74,7 +71,7 @@ public class MongoService {
         PaginationFilters pf = mapper.convertValue(environment.getArgument("pagination"), PaginationFilters.class);
         return cr.getCommunities(cf,pf);
     };
-
+    
     public List<BenchmarkingEvent> getBenchmarkingEvents(DataFetchingEnvironment environment) {
         BenchmarkingEventFilters bf = new BenchmarkingEventFilters();
         Community c = environment.getSource();
@@ -86,7 +83,7 @@ public class MongoService {
         PaginationFilters pf = mapper.convertValue(environment.getArgument("pagination"), PaginationFilters.class);
         return br.getBenchmarkingEvents(bf, pf);
     }
-    
+
     public List<Challenge> getChallenges(DataFetchingEnvironment environment) {
         ChallengeFilters chf = new ChallengeFilters();
         BenchmarkingEvent b = environment.getSource();

@@ -93,14 +93,28 @@ type CDates {
     challenge_stop: String
 }
 
+type Metric {
+    metrics_id: String
+    tool_id: String
+}
+
+type MetricsCategory {
+    category_id: String
+    description: String
+    metrics: [Metric]
+}
+
 type Challenge{
     _id: String
     _schema: String
+    acronym: String
     orig_id: String
+    description: String
     name: String
     is_automated: Boolean
     dates: CDates
     url: String
+    metrics_category: MetricsCategory
     benchmarking_event_id: String
     challenge_contact_ids: [String]
     references: [String]
@@ -131,6 +145,7 @@ type Community {
     name: String
     community_contact_ids: [String]
     links: [Link]
+    references: [String]
     benchmarkingEvents(pagination: PaginationFilters): [BenchmarkingEvent]
 }
 
@@ -158,6 +173,7 @@ type Tool {
     _schema: String
     registry_tool_id: String
     name: String
+    community_ids: [String]
     description: String
     is_automated: Boolean
     tool_contact_ids: [String]
@@ -168,9 +184,9 @@ type Tool {
     tool_access: [ToolAccess]
 }
 
-type Implementation {
-    tool_id: String
-    community_ids: [String]
+type Implementations {
+    tool_ids: [String]
+    community_id: String
 }
 
 type Metrics {
@@ -181,13 +197,13 @@ type Metrics {
     description: String
     metrics_contact_ids: [String]
     formal_definition: String
-    implementation: [Implementation]
+    #implementations: [Implementations]
     execution_type: String
     data_schemas: String
     links: [Link]
     references: [String]
     representation_hints : String
-    community_id: String
+    #community_id: String
 }
 
 type Query{

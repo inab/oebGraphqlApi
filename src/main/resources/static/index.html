@@ -112,6 +112,7 @@
     function graphQLFetcher(graphQLParams) {
         // This example expects a GraphQL server at the path /graphql.
         // Change this to point wherever you host your GraphQL server.
+        //Add sciapi for wildfly on OEB dev server
         return fetch('/sciapi/graphql', {
             method: 'post',
             headers: {

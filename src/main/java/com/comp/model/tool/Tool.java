@@ -20,6 +20,7 @@ public class Tool {
     private String _schema;
     private String registry_tool_id;
     private String name;
+    private List<String> community_ids;
     private String description;
     private Boolean is_automated;
     @Field("tool_contact_id")
@@ -29,7 +30,5 @@ public class Tool {
     private String deactivation;
     private List<String> references;
     private List<ToolAccess> tool_access;
-    //Not in schema
-    private List<String> community_id;
     
 }

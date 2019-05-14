@@ -5,7 +5,7 @@
  */
 package com.comp.model.metrics;
 
-import com.comp.model.utils.Implementation;
+import com.comp.model.utils.Implementations;
 import com.comp.model.utils.Link;
 import java.util.List;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -23,7 +23,7 @@ public class Metrics {
     private String description;
     private List<String> metrics_contact_ids;
     private String formal_definition;
-    private List<Implementation> implementations;
+//    private List<Implementations> implementations;
     private String execution_type;
     private String data_schemas;
     private List<Link> links;
@@ -31,5 +31,5 @@ public class Metrics {
     private String representation_hints;
     
     //NOT IN SCHEMA
-    private String community_id;
+    //private String community_id;
 }

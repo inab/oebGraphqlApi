@@ -21,8 +21,7 @@ public class Dataset {
     private String _id;
     private String _schema;
     private String orig_id;
-    private String community_id;
-    @Field("challenge_id")
+    private List<String> community_ids;
     private List<String> challenge_ids;
     private String visibility;
     private String name;
