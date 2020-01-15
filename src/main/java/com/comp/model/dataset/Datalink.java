@@ -23,4 +23,6 @@ public class Datalink {
     //The uri will change !!
     // this uses scalar type Json to print what ever is present in the DB
     private Object uri;
+    private Object inline_data;
 }
+

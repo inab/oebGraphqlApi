@@ -13,10 +13,12 @@ public class Link {
     
     private String label;
     private String uri;
+    private String comment;
     
-    public Link(String label, String uri) {
+    public Link(String label, String uri, String comment) {
         this.label = label;
         this.uri = uri;
+        this.comment = comment;
     }
 
     public Link() {
@@ -37,5 +39,13 @@ public class Link {
     public void setUri(String uri) {
         this.uri = uri;
     }    
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
     
 }

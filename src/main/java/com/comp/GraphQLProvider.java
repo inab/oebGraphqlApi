@@ -5,6 +5,7 @@
  */
 package com.comp;
 
+import com.comp.model.benchmarkingEvent.BenchmarkingEventFilters;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import graphql.GraphQL;

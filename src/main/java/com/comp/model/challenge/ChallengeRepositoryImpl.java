@@ -11,6 +11,7 @@ import com.comp.pagination.PaginationMethods;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -42,6 +43,7 @@ public class ChallengeRepositoryImpl implements ChallengeRepositoryCustom {
                 query.addCriteria(Criteria.where("benchmarking_event_id").is(challengeFilters.getBenchmarking_event_id()));
             }
         }
+        query.with(Sort.by("acronym"));
         
         challenges = mt.find(query,Challenge.class);
         return challenges;

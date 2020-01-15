@@ -1,7 +1,13 @@
 input DatasetFilters {
+    id: String
     visibility: String
     community_id : String
     challenge_id : String
+    type: String
+}
+
+input EmbededDatasetFilters {
+    visibility: String
     type: String
 }
 
@@ -51,6 +57,7 @@ type Datalink{
     validation_date: String
     status: String
     uri: JSON
+    inline_data: JSON
 }
 
 type Dates{
@@ -69,6 +76,7 @@ type ToolAccess{
 type Link {
     label: String
     uri: String
+    comment: String
 }
 
 type DependsOn {
@@ -99,7 +107,7 @@ type Metric {
 }
 
 type MetricsCategory {
-    category_id: String
+    category: String
     description: String
     metrics: [Metric]
 }
@@ -114,11 +122,11 @@ type Challenge{
     is_automated: Boolean
     dates: CDates
     url: String
-    metrics_category: MetricsCategory
+    metrics_categories: [MetricsCategory]
     benchmarking_event_id: String
     challenge_contact_ids: [String]
     references: [String]
-    datasets(pagination: PaginationFilters): [Dataset]
+    datasets(pagination: PaginationFilters, datasetFilters: EmbededDatasetFilters): [Dataset]
 }
 
 type BenchmarkingEvent {
@@ -153,7 +161,7 @@ type Dataset{
     _id: String
     _schema: String
     orig_id: String
-    community_id: String
+    community_ids: [String]
     challenge_ids: [String]
     visibility: String
     name: String
@@ -202,7 +210,7 @@ type Metrics {
     data_schemas: String
     links: [Link]
     references: [String]
-    representation_hints : String
+    representation_hints : JSON
     #community_id: String
 }
 

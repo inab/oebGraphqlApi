@@ -11,6 +11,7 @@ import com.comp.model.benchmarkingEvent.BenchmarkingEventRepository;
 import com.comp.model.challenge.Challenge;
 import com.comp.model.challenge.ChallengeFilters;
 import com.comp.model.challenge.ChallengeRepository;
+import com.comp.model.challenge.EmbededDatasetFilters;
 
 import com.comp.model.community.Community;
 import com.comp.model.community.CommunityFilters;
@@ -80,6 +81,7 @@ public class MongoService {
         } else {
             bf = mapper.convertValue(environment.getArgument("benchmarkingEventFilters"), BenchmarkingEventFilters.class);
         }
+
         PaginationFilters pf = mapper.convertValue(environment.getArgument("pagination"), PaginationFilters.class);
         return br.getBenchmarkingEvents(bf, pf);
     }
@@ -96,16 +98,24 @@ public class MongoService {
         return chr.getChallenges(chf,pf);
     }
     
-    public List<Dataset> getDatasets(DataFetchingEnvironment environment){
-        DatasetFilters dsf = new DatasetFilters();
+    public List <Dataset> getDatasets(DataFetchingEnvironment environment){
+        System.out.println(environment);
+        DatasetFilters edsf = new DatasetFilters();
         Challenge ch = environment.getSource();
         if(ch != null){
-            dsf.setChallenge_id(ch.getId());
+            EmbededDatasetFilters dsf = new EmbededDatasetFilters();
+            if(environment.containsArgument("datasetFilters")){
+                dsf = mapper.convertValue(environment.getArgument("datasetFilters"), EmbededDatasetFilters.class);
+            }
+            edsf.setChallenge_id(ch.getId());
+            edsf.setType(dsf.getType());
+            edsf.setVisibility(dsf.getVisibility());
         } else {
-            dsf = mapper.convertValue(environment.getArgument("datasetFilters"), DatasetFilters.class);
-        }
+            edsf = mapper.convertValue(environment.getArgument("datasetFilters"), DatasetFilters.class);
+        }   
+        
         PaginationFilters pf = mapper.convertValue(environment.getArgument("pagination"), PaginationFilters.class);
-        return dr.getDatasets(dsf,pf);
+        return dr.getDatasets(edsf,pf);
     }
 
     public List<Metrics> getMetrics(DataFetchingEnvironment environment) {

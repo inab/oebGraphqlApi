@@ -12,7 +12,7 @@ import java.util.List;
  * @author vsundesh
  */
 public class MetricsCategory {
-    private String category_id;
+    private String category;
     private String description;
     private List<Metric> metrics;
 }

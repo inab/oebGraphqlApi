@@ -33,11 +33,14 @@ public class DatasetRepositoryImpl implements DatasetRepositoryCustom {
         }
          
         if(datasetFilters!=null){
+            if(datasetFilters.getId() !=null){
+                query.addCriteria(Criteria.where("_id").is(datasetFilters.getId()));
+            }
             if(datasetFilters.getVisibility()!=null){
                 query.addCriteria(Criteria.where("visibility").is(datasetFilters.getVisibility()));
             }
             if(datasetFilters.getCommunity_id()!=null){
-                query.addCriteria(Criteria.where("community_id").is(datasetFilters.getCommunity_id()));
+                query.addCriteria(Criteria.where("community_ids").in(datasetFilters.getCommunity_id()));
             }
             if(datasetFilters.getChallenge_id()!=null){
                 query.addCriteria(Criteria.where("challenge_ids").in(datasetFilters.getChallenge_id()));

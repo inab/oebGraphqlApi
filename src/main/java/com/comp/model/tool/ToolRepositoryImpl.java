@@ -37,7 +37,7 @@ public class ToolRepositoryImpl implements ToolRepositoryCustom{
                 query.addCriteria(Criteria.where("_id").is(toolFilters.getId()));
             }
             if(toolFilters.getCommunity_id() !=null){
-                query.addCriteria(Criteria.where("community_id").is(toolFilters.getCommunity_id()));
+                query.addCriteria(Criteria.where("community_ids").in(toolFilters.getCommunity_id()));
             }
         }
         

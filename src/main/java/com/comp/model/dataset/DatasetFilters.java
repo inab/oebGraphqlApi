@@ -10,6 +10,7 @@ package com.comp.model.dataset;
  * @author vsundesh
  */
 public class DatasetFilters {
+    private String id;
     private String visibility;
     private String community_id;
     private String type;
@@ -18,6 +19,14 @@ public class DatasetFilters {
     
 
     public DatasetFilters() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
     
     

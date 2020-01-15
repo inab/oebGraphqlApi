@@ -26,7 +26,7 @@ public class Challenge {
     private Boolean is_automated;
     private Dates dates;
     private String url;
-    private MetricsCategory metrics_category;
+    private List<MetricsCategory> metrics_categories;
     private String benchmarking_event_id;
     private List<String> challenge_contact_ids;
     private List<String> references;
@@ -107,15 +107,17 @@ public class Challenge {
         this.url = url;
     }
 
-    public MetricsCategory getMetrics_category() {
-        return metrics_category;
+    public List<MetricsCategory> getMetrics_categories() {
+        return metrics_categories;
     }
 
-    public void setMetrics_category(MetricsCategory metrics_category) {
-        this.metrics_category = metrics_category;
+    public void setMetrics_categories(List<MetricsCategory> metrics_categories) {
+        this.metrics_categories = metrics_categories;
     }
-    
-    
+
+
+
+        
 
     public String getBenchmarking_event_id() {
         return benchmarking_event_id;

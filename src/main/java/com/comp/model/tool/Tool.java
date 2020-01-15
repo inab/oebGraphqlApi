@@ -23,7 +23,6 @@ public class Tool {
     private List<String> community_ids;
     private String description;
     private Boolean is_automated;
-    @Field("tool_contact_id")
     private List<String> tool_contact_ids;
     private String status;
     private String activation;
