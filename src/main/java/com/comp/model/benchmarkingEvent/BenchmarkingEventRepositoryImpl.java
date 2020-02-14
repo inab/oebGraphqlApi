@@ -42,10 +42,10 @@ public class BenchmarkingEventRepositoryImpl implements BenchmarkingEventReposit
         
         if(benchmarkingEventFilters!=null){
             if(benchmarkingEventFilters.getId()!=null){
-                query.addCriteria(Criteria.where("_id").is(benchmarkingEventFilters.getId()));
+                query.addCriteria(Criteria.where("_id").is(benchmarkingEventFilters.getId().toUpperCase()));
             }
             if(benchmarkingEventFilters.getCommunity_id()!=null){
-                query.addCriteria(Criteria.where("community_id").is(benchmarkingEventFilters.getCommunity_id()));
+                query.addCriteria(Criteria.where("community_id").is(benchmarkingEventFilters.getCommunity_id().toUpperCase()));
             }
         }
         

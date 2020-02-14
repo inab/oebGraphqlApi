@@ -37,10 +37,10 @@ public class ChallengeRepositoryImpl implements ChallengeRepositoryCustom {
         
         if(challengeFilters!=null){
             if(challengeFilters.getId()!=null){
-                query.addCriteria(Criteria.where("_id").is(challengeFilters.getId()));
+                query.addCriteria(Criteria.where("_id").is(challengeFilters.getId().toUpperCase()));
             }
             if(challengeFilters.getBenchmarking_event_id()!=null){
-                query.addCriteria(Criteria.where("benchmarking_event_id").is(challengeFilters.getBenchmarking_event_id()));
+                query.addCriteria(Criteria.where("benchmarking_event_id").is(challengeFilters.getBenchmarking_event_id().toUpperCase()));
             }
         }
         query.with(Sort.by("acronym"));

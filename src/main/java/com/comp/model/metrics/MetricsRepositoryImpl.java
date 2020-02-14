@@ -34,10 +34,10 @@ public class MetricsRepositoryImpl implements MetricsRepositoryCustom{
          
         if(metricsFilters!=null){
             if(metricsFilters.getId()!=null){
-                query.addCriteria(Criteria.where("_id").is(metricsFilters.getId()));
+                query.addCriteria(Criteria.where("_id").is(metricsFilters.getId().toUpperCase()));
             }
             if(metricsFilters.getCommunity_id()!=null){
-                query.addCriteria(Criteria.where("implementations").elemMatch(Criteria.where("community_id").is(metricsFilters.getCommunity_id())));
+                query.addCriteria(Criteria.where("implementations").elemMatch(Criteria.where("community_id").is(metricsFilters.getCommunity_id().toUpperCase())));
             }
         }
         

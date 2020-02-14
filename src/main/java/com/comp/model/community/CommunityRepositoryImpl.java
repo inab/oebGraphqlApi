@@ -40,10 +40,10 @@ public class CommunityRepositoryImpl implements CommunityRepositoryCustom {
          
         if(communityFilters!=null){
             if(communityFilters.getId() !=null){
-                query.addCriteria(Criteria.where("_id").is(communityFilters.getId()));
+                query.addCriteria(Criteria.where("_id").is(communityFilters.getId().toUpperCase()));
             }
             if(communityFilters.getStatus() !=null){
-                query.addCriteria(Criteria.where("status").is(communityFilters.getStatus()));
+                query.addCriteria(Criteria.where("status").is(communityFilters.getStatus().toUpperCase()));
             }
         }
 

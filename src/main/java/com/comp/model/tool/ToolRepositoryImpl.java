@@ -34,10 +34,10 @@ public class ToolRepositoryImpl implements ToolRepositoryCustom{
          
         if(toolFilters!=null){
             if(toolFilters.getId() !=null){
-                query.addCriteria(Criteria.where("_id").is(toolFilters.getId()));
+                query.addCriteria(Criteria.where("_id").is(toolFilters.getId().toUpperCase()));
             }
             if(toolFilters.getCommunity_id() !=null){
-                query.addCriteria(Criteria.where("community_ids").in(toolFilters.getCommunity_id()));
+                query.addCriteria(Criteria.where("community_ids").in(toolFilters.getCommunity_id().toUpperCase()));
             }
         }
         
