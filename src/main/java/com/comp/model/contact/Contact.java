@@ -24,5 +24,6 @@ public class Contact {
     public String community_id;
     public String notes;
     public List<Link> links;
+    private Object _metadata;
     
 }

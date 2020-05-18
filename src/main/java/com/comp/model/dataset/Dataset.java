@@ -33,5 +33,6 @@ public class Dataset {
     private List<String> dataset_contact_ids;
     private DependsOn depends_on;
     private List<String> references;
+    private Object _metadata;
 
 }

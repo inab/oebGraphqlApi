@@ -29,5 +29,6 @@ public class Tool {
     private String deactivation;
     private List<String> references;
     private List<ToolAccess> tool_access;
+    private Object _metadata;
     
 }

@@ -30,6 +30,7 @@ public class Challenge {
     private String benchmarking_event_id;
     private List<String> challenge_contact_ids;
     private List<String> references;
+    private Object _metadata;
 
 
     public Challenge() {

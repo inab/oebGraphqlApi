@@ -26,5 +26,5 @@ public class TestAction {
     private List<String> test_contact_ids;
     private String status;
     private Dates dates;
-    private String metadata;
+    private Object _metadata;
 }

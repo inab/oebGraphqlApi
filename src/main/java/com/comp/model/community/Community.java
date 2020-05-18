@@ -38,6 +38,7 @@ public class Community {
     private List<String> community_contact_ids;
     private List<MetricsCategory> metrics_categories;
     private List <ReferenceTool> reference_tools;
+    private Object _metadata;
 
     
     

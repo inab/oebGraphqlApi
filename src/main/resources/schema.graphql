@@ -126,6 +126,7 @@ type Challenge{
     benchmarking_event_id: String
     challenge_contact_ids: [String]
     references: [String]
+    _metadata : JSON
     datasets(pagination: PaginationFilters, datasetFilters: EmbededDatasetFilters): [Dataset]
 }
 
@@ -140,6 +141,7 @@ type BenchmarkingEvent {
     community_id: String
     bench_contact_ids: [String]
     references: [String]
+    _metadata : JSON
     challenges(pagination: PaginationFilters): [Challenge]
 }
 
@@ -154,6 +156,7 @@ type Community {
     community_contact_ids: [String]
     links: [Link]
     references: [String]
+    _metadata : JSON
     benchmarkingEvents(pagination: PaginationFilters): [BenchmarkingEvent]
 }
 
@@ -173,6 +176,7 @@ type Dataset{
     dataset_contact_ids: [String]
     depends_on: DependsOn
     references: [String]
+    _metadata : JSON
 }
 
 
@@ -189,6 +193,7 @@ type Tool {
     activation: String
     deactivation: String
     references: [String]
+    _metadata : JSON
     tool_access: [ToolAccess]
 }
 
@@ -211,6 +216,7 @@ type Metrics {
     links: [Link]
     references: [String]
     representation_hints : JSON
+    _metadata : JSON
     #community_id: String
 }
 

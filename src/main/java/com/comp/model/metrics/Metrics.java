@@ -29,6 +29,7 @@ public class Metrics {
     private List<Link> links;
     private List<String> references;
     private Object representation_hints;
+    private Object _metadata;
     
     //NOT IN SCHEMA
     //private String community_id;

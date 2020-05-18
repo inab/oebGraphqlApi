@@ -24,5 +24,6 @@ public class Reference {
     @Field("abstract")
     private String _abstract;
     private List<Author> authors;
+    private Object _metadata;
     
 }

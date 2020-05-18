@@ -28,6 +28,7 @@ public class BenchmarkingEvent {
     private String community_id;
     private List<String> bench_contact_ids;
     private List<String> references;
+    private Object _metadata;
 
     public BenchmarkingEvent() {
     }

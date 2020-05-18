@@ -17,4 +17,5 @@ public class Idsolve {
     private String description;
     private String pattern;
     private String endpoints;
+    private Object _metadata;
 }
