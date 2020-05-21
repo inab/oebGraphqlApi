@@ -38,9 +38,10 @@ public class GraphQLController {
     }
 
     @RequestMapping(value = "/graphql", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin
     public Map<String, Object> graphqlGET(@RequestParam("query") String query,
                                           @RequestParam(value = "operationName", required = false) String operationName,
-                                          @RequestParam("variables") String variablesJson
+                                          @RequestParam(value = "variables", required = false) String variablesJson
     ) throws IOException {
         Map<String, Object> variables = new LinkedHashMap<>();
         if (variablesJson != null) {
