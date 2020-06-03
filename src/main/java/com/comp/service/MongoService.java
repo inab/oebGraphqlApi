@@ -16,6 +16,9 @@ import com.comp.model.challenge.EmbededDatasetFilters;
 import com.comp.model.community.Community;
 import com.comp.model.community.CommunityFilters;
 import com.comp.model.community.CommunityRepository;
+import com.comp.model.contact.Contact;
+import com.comp.model.contact.ContactFilters;
+import com.comp.model.contact.ContactRepository;
 import com.comp.model.dataset.Dataset;
 import com.comp.model.dataset.DatasetFilters;
 import com.comp.model.dataset.DatasetRepository;
@@ -27,6 +30,7 @@ import com.comp.model.tool.ToolFilters;
 import com.comp.model.tool.ToolRepository;
 import com.comp.pagination.PaginationFilters;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +61,9 @@ public class MongoService {
     
     @Autowired
     private MetricsRepository mr;
+    
+    @Autowired
+    private ContactRepository conr;
     
     @Autowired
     ObjectMapper mapper;
@@ -122,5 +129,11 @@ public class MongoService {
         MetricsFilters mf = mapper.convertValue(environment.getArgument("metricsFilters"), MetricsFilters.class);
         PaginationFilters pf = mapper.convertValue(environment.getArgument("pagination"), PaginationFilters.class);
         return mr.getMetrics(mf, pf);
+    }
+
+    public List<Contact> getContacts(DataFetchingEnvironment environment) {
+        ContactFilters cf = mapper.convertValue(environment.getArgument("contactFilters"), ContactFilters.class);
+        PaginationFilters pf = mapper.convertValue(environment.getArgument("pagination"), PaginationFilters.class);
+        return conr.getContacts(cf, pf);
     }
 }

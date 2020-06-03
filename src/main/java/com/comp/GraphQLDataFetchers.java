@@ -55,4 +55,10 @@ public class GraphQLDataFetchers {
             return  ms.getMetrics(environment);
         };
     }
+
+    DataFetcher getContacts() {
+        return environment -> {
+            return  ms.getContacts(environment);
+        };
+    }
 }

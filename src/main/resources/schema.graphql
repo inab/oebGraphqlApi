@@ -47,6 +47,10 @@ type RelDatasetId {
     role: String
 }
 
+input ContactFilters {
+    id: String
+    community_id: String    
+}
 
 scalar JSON
 
@@ -220,6 +224,19 @@ type Metrics {
     #community_id: String
 }
 
+type Contact {
+    _id: String
+    _schema: String
+    contact_type: String
+    givenName: String
+    surname: String
+    email: [String]
+    community_id: String
+    notes: String
+    links: [Link]
+    _metadata : JSON
+}
+
 type Query{
     getCommunities(communityFilters: CommunityFilters, pagination: PaginationFilters) : [Community]
 
@@ -232,5 +249,7 @@ type Query{
     getTools(toolFilters: ToolFilters, pagination: PaginationFilters) : [Tool]
 
     getMetrics(metricsFilters: MetricsFilters, pagination: PaginationFilters) : [Metrics]
+
+    getContacts(contactFilters: ContactFilters, pagination: PaginationFilters) : [Contact]
     
 }
