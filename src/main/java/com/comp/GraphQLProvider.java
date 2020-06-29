@@ -68,6 +68,7 @@ public class GraphQLProvider {
                     .dataFetcher("getTools",graphQLDataFetchers.getTools())
                     .dataFetcher("getMetrics", graphQLDataFetchers.getMetrics())
                     .dataFetcher("getContacts", graphQLDataFetchers.getContacts())
+                    .dataFetcher("getTestActions", graphQLDataFetchers.getTestActions())
             )
             .type("Community",typeWiring -> typeWiring
                     .dataFetcher("benchmarkingEvents", graphQLDataFetchers.getBenchmarkingEvents())

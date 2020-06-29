@@ -52,6 +52,11 @@ input ContactFilters {
     community_id: String    
 }
 
+input TestActionFilters {
+    id: String
+    tool_id: String    
+}
+
 scalar JSON
 
 
@@ -237,6 +242,26 @@ type Contact {
     _metadata : JSON
 }
 
+type InvolvedDataset {
+    dataset_id: String
+    role: String
+    received: String
+}
+
+type TestAction {
+    _id: String
+    _schema: String
+    orig_id: String
+    tool_id: String
+    action_type: String
+    involved_datasets: [InvolvedDataset]
+    challenge_id: String
+    test_contact_ids: [String]
+    status: String
+    dates: Dates
+    _metadata : JSON
+}
+
 type Query{
     getCommunities(communityFilters: CommunityFilters, pagination: PaginationFilters) : [Community]
 
@@ -251,5 +276,7 @@ type Query{
     getMetrics(metricsFilters: MetricsFilters, pagination: PaginationFilters) : [Metrics]
 
     getContacts(contactFilters: ContactFilters, pagination: PaginationFilters) : [Contact]
+
+    getTestActions(testActionFilters: TestActionFilters, pagination: PaginationFilters) : [TestAction]
     
 }

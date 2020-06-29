@@ -61,4 +61,10 @@ public class GraphQLDataFetchers {
             return  ms.getContacts(environment);
         };
     }
+    
+    DataFetcher getTestActions() {
+        return environment -> {
+            return  ms.getTestActions(environment);
+        };
+    }
 }

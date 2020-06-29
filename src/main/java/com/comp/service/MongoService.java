@@ -25,6 +25,9 @@ import com.comp.model.dataset.DatasetRepository;
 import com.comp.model.metrics.Metrics;
 import com.comp.model.metrics.MetricsFilters;
 import com.comp.model.metrics.MetricsRepository;
+import com.comp.model.testAction.TestAction;
+import com.comp.model.testAction.TestActionFilters;
+import com.comp.model.testAction.TestActionRepository;
 import com.comp.model.tool.Tool;
 import com.comp.model.tool.ToolFilters;
 import com.comp.model.tool.ToolRepository;
@@ -64,6 +67,9 @@ public class MongoService {
     
     @Autowired
     private ContactRepository conr;
+    
+    @Autowired
+    private TestActionRepository tar;
     
     @Autowired
     ObjectMapper mapper;
@@ -135,5 +141,11 @@ public class MongoService {
         ContactFilters cf = mapper.convertValue(environment.getArgument("contactFilters"), ContactFilters.class);
         PaginationFilters pf = mapper.convertValue(environment.getArgument("pagination"), PaginationFilters.class);
         return conr.getContacts(cf, pf);
+    }
+    
+    public List<TestAction> getTestActions(DataFetchingEnvironment environment) {
+        TestActionFilters taf = mapper.convertValue(environment.getArgument("testActionFilters"), TestActionFilters.class);
+        PaginationFilters pf = mapper.convertValue(environment.getArgument("pagination"), PaginationFilters.class);
+        return tar.getTestActions(taf, pf);
     }
 }
