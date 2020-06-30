@@ -12,6 +12,7 @@ package com.comp.model.testAction;
 public class TestActionFilters {
     private String _id;
     private String tool_id;
+    private String action_type;
 
     public String getId() {
         return _id;
@@ -28,7 +29,13 @@ public class TestActionFilters {
     public void setTool_id(String tool_id) {
         this.tool_id = tool_id;
     }
-    
-     
+
+    public String getAction_type() {
+        return action_type;
+    }
+
+    public void setAction_type(String action_type) {
+        this.action_type = action_type;
+    }
     
 }

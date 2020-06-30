@@ -54,7 +54,8 @@ input ContactFilters {
 
 input TestActionFilters {
     id: String
-    tool_id: String    
+    tool_id: String
+    action_type: String    
 }
 
 scalar JSON

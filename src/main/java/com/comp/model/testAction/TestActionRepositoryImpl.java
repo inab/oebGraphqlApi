@@ -38,6 +38,9 @@ public class TestActionRepositoryImpl implements TestActionRepositoryCustom {
             if(testActionFilters.getTool_id()!=null){
                 query.addCriteria(Criteria.where("tool_id").is(testActionFilters.getTool_id().toUpperCase()));
             }
+            if(testActionFilters.getAction_type()!=null){
+                query.addCriteria(Criteria.where("action_type").is(testActionFilters.getAction_type()));
+            }
         }
         
         testActions = mt.find(query,TestAction.class);
